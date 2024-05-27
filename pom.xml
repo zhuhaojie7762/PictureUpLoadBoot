@@ -188,6 +188,12 @@
             <version>${poi.version}</version>
         </dependency>
         <!-- excel依赖结束 -->
+        <!--json-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>PictureUpLoadMaven</finalName>
