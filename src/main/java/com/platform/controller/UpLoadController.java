@@ -8,6 +8,6 @@ public class UpLoadController {
 
     @RequestMapping(value = "uploadPicture")
     public String getHtml(){
-        return "upload";
+        return "htmlView/upload";
     }
 }
