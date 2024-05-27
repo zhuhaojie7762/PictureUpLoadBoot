@@ -1,0 +1,149 @@
+/*.middle-user{
+	width: 800px;
+	text-align: center;
+	position: relative;
+	left: 400px;
+	margin-left: -25%;
+}
+.form-user{
+	width: 200px;
+}
+.col-user{
+	text-align: right;
+}
+.user-add{
+	position: relative;
+	top: 3px;
+}
+.user-top{
+	margin-top: 20px;
+}*/
+.content{
+	width: 800px;
+    
+    position: relative;
+    margin-left: -400px;
+    left: 41%;
+    margin-top: 40px;
+}
+.phone-number{
+	width: 100%;
+}
+.color{
+	color: #FF0000;
+	position: relative;
+	top: 4px;
+	margin-right: 3px;
+}
+.prompt-re{
+	text-align: left;
+	margin-top: 6px;
+	padding-left: 0px;
+}
+.code-reg a{
+	display: inline-block;
+	padding: 5px 18px;
+	margin-top: 1px;
+	background: #1AAB02;
+	border: 1px solid #1AAB02;
+	border-radius: 3px;
+}
+.code-reg a:link,.code-reg a:visited{
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.code-reg a:hover{
+	color: #000;
+	text-decoration: none;
+}
+.nv{
+	margin-left: 20px;
+}
+.sex-re{
+	padding-top: 7px;
+}
+.upload{
+	vertical-align: bottom;
+	display: inline-block;
+	color: #1AAB02;
+	padding: 4px 8px;
+	border: 1px solid #1AAB02;
+}
+.upload:link,.upload:visited{
+	color: #1AAB02;
+	text-decoration: none;
+}
+.upload:hover{
+	color: #006600;
+	text-decoration: none;
+}
+.province{
+	width: 100px;
+	display: inline-block;
+}
+.agree{
+	background: #1AAB02;
+    border-radius: 3px;
+    margin-left: 5px;
+}
+.agree:link,.agree:visited{
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.agree:hover{
+	color: #7D7D7D;
+	text-decoration: none;
+}
+.apply a{
+	background: #1AAB02;
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+	padding-top: 7px;
+	padding-bottom: 7px;
+}
+.apply a:link,.apply a:visited{
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.apply a:hover{
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.btn-color{
+	background: #1AAB02;
+}
+.code-reg{
+	font-size: 12px;
+.middle-user{
+	width: 800px;
+	text-align: center;
+	position: relative;
+	left: 400px;
+	margin-left: -25%;
+}
+.form-user{
+	width: 265px;
+}
+.col-user{
+	text-align: right;
+}
+.user-add{
+	position: relative;
+	top: 3px;
+}
+.choose{
+	text-align: left;
+}
+.submit{
+	padding: 4px 8px;
+}
+.submit-add{
+	text-align: center;
+}
+.user-top{
+	margin-top: 20px;
+}
+.details-col{
+	text-align:left;
+}

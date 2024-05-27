@@ -1,0 +1,22 @@
+body{
+	background: url(../images/501.gif) no-repeat center 0px;
+}
+.first a:link,.first a:visited{
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.first a:hover{
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.first a{
+	display: inline-block;
+	background: #0085D9;
+	border: 1px solid #0085D9;
+	border-radius: 4px;
+	padding: 5px;
+}
+.first{
+	margin-left: 55%;
+	margin-top: 310px;
+}

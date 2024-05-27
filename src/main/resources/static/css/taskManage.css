@@ -1,0 +1,44 @@
+.ui-th-column{
+	padding-left: 12px;
+}
+.name-task{
+	padding-left: 0px;
+}
+.allo{
+	display: inline;
+}
+.modal-content{
+	position: relative;
+	top: 30vh;
+	width: 300px;
+}
+.browse{
+	margin-left: 20px;
+}
+.modal-file{
+	width: 600px;
+}
+.disagree{
+	margin-top: 15px;
+}
+.form-delete{
+	height: 80px;
+	width: 200px;
+}
+.form-type{
+	display: inline-block;
+	width: 300px;
+	position: relative;
+	top: -1vh;
+}
+.modal-width{
+	width:600px;
+}
+.text-wid{
+	width:300px;
+	display:inline-block;
+}
+.text-pad{
+	margin-left:5px;
+	color:#f00;
+}

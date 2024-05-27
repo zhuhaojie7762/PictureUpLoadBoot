@@ -1,0 +1,29 @@
+body{
+	background: #FFFFFF;
+	margin: 0px;
+	padding: 0px;
+}
+.first-img{
+	text-align: center;
+	margin-top: 50px;
+}
+.first a:link,.first a:visited{
+	color: #0085D9;
+	text-decoration: none;
+}
+.first a:hover{
+	color: #197CC1;
+	text-decoration: none;
+}
+.first a{
+	display: inline-block;
+	background: #FFFFFF;
+	border: 1px solid #0085D9;
+	border-radius: 4px;
+	padding: 5px;
+}
+.first{
+	margin-left: 32%;
+	position: relative;
+	top: -130px;
+}

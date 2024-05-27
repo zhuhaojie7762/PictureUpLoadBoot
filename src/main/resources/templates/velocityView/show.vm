@@ -1,0 +1,52 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<head>
+<base href="<%=basePath%>">
+
+<%@ include file="../../common/header.jsp"%>
+<script type="text/javascript">
+	$(function() {
+		//绑定提交按钮click事件
+		$("#close_button").click(function() {
+			window.parent.closeShow();
+		});
+	});
+</script>
+</head>
+  
+<body>
+	<div class="ui-table ui-widget ui-corner-all ui-border">
+		<table class="table forview">
+#set($dot="$")
+#set($cols = 2)
+#set($index=1)
+#set($size = $bean.lcolumnList.size()) 	
+#set($colspan = $cols*2 - ($size*2 % ($cols*2)) + 1)
+#if(($size*2 % ($cols*2)) == 0)#set($colspan = 0)#end
+#foreach( $key in $bean.lcolumnList.keySet())
+#if($bean.lcolumnList.get("id") != $bean.lcolumnList.get($key))
+#if( $index % $cols == 1)
+			<tr>
+#end
+				<td class="inputLabelTd">$bean.commentList.get($key)：</td>
+				<td class="inputTd"#if($index == $size) colspan="${colspan}"#end>${$!{bean.lowerName}.$!{bean.lcolumnList.get($key)}}</td>
+#if( $index % $cols == 0 || $index == $size)
+			</tr>
+#end
+#set( $index=$index+1)
+#end
+#end
+			<tr>
+				<td class="inputTd" colspan="4" style="text-align:center;">
+					<input class="ti_bottom"  type="button" id="close_button"  value="关闭"/>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+.modal-content{
+	position: relative;
+	top: 30vh;
+	width: 500px;
+}
+.form-file{
+	width: 200px;
+	display: inline-block;
+}
+.color-form{
+	color: #FF0000;
+	margin-left: 10px;
+}
+.modal-user{
+	width: 300px;
+}

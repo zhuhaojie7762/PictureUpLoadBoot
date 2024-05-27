@@ -1,0 +1,27 @@
+.container-task{
+	width: 100%;
+}
+.container-left{
+	float: left;
+	width: 50%;
+	padding: 20px;
+}
+.container-right{
+	float: right;
+	width: 50%;
+	padding: 20px;
+}
+.back-task a:link,.back-task a:visited{
+	color: #197CC1;
+	text-decoration: none;
+}
+.back-task a:hover{
+	color: #0085D9;
+	text-decoration: none;
+}
+.back-task a h5{
+	display: inline;
+}
+.img-task img{
+	width: 100%;
+}
