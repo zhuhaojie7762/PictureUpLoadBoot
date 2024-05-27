@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.dao.OrderOriginDAO">
+    <resultMap id="BaseResultMap"
+               type="com.platform.entity.OrderOrigin">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <id column="fp_userid_" property="userId" jdbcType="INTEGER"/>
+        <result column="fd_begin_time" property="beginTime" jdbcType="TIMESTAMP"/>
+        <result column="fd_end_time" property="endTime" jdbcType="TIMESTAMP"/>
+        <result column="fd_content" property="content" jdbcType="VARCHAR"/>
+        <result column="fd_create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="fd_update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <!--基础列 -->
+    <sql id="Base_Column_List">
+	id,fp_userid_,fd_begin_time,fd_end_time,fd_content,fd_create_time
+	</sql>
+
+    <!--公共按主键进行查询 -->
+    <select id="selectById" resultMap="BaseResultMap"
+            parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from order_origin where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <!--公共列表方法 -->
+    <select id="list" resultMap="BaseResultMap"
+            parameterType="com.platform.entity.OrderOrigin">
+        select
+        <include refid="Base_Column_List"/>
+        from order_origin
+        <where>
+            <if test="id!=null">id=#{id,jdbcType=INTEGER}</if>
+            <if test="userId!=null">and fp_userid_=#{userId,jdbcType=INTEGER}</if>
+            <if test="beginTime!=null">and ft_begin_time=#{beginTime,jdbcType=TIMESTAMP}</if>
+            <if test="endTime!=null">and ft_end_time=#{endTime,jdbcType=TIMESTAMP}</if>
+            <if test="content!=null">and fd_content=#{content,jdbcType=VARCHAR}</if>
+            <if test="createTime!=null ">and fd_create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+            <if test="updateTime!=null ">and fd_create_time=#{updateTime,jdbcType=TIMESTAMP}</if>
+        </where>
+    </select>
+
+
+    <delete id="delete" parameterType="com.platform.entity.OrderOrigin">
+        delete from order_origin
+        <where>
+            <if test="id!=null">id=#{id,jdbcType=INTEGER}</if>
+            <if test="userId!=null">and fp_userid_=#{userId,jdbcType=INTEGER}</if>
+            <if test="beginTime!=null">and ft_begin_time=#{beginTime,jdbcType=TIMESTAMP}</if>
+            <if test="endTime!=null">and ft_end_time=#{endTime,jdbcType=TIMESTAMP}</if>
+            <if test="content!=null">and fd_content=#{content,jdbcType=VARCHAR}</if>
+            <if test="createTime!=null ">and fd_create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+            <if test="updateTime!=null ">and fd_create_time=#{updateTime,jdbcType=TIMESTAMP}</if>
+        </where>
+    </delete>
+
+    <!--公共get方法 -->
+    <select id="get" resultMap="BaseResultMap"
+            parameterType="com.platform.entity.OrderOrigin">
+        select
+        <include refid="Base_Column_List"/>
+        from order_origin
+        <where>
+            <if test="id!=null">id=#{id,jdbcType=INTEGER}</if>
+            <if test="userId!=null">and fp_userid_=#{userId,jdbcType=INTEGER}</if>
+            <if test="beginTime!=null">and ft_begin_time=#{beginTime,jdbcType=TIMESTAMP}</if>
+            <if test="endTime!=null">and ft_end_time=#{endTime,jdbcType=TIMESTAMP}</if>
+            <if test="content!=null">and fd_content=#{content,jdbcType=VARCHAR}</if>
+            <if test="createTime!=null ">and fd_create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+            <if test="updateTime!=null ">and fd_create_time=#{updateTime,jdbcType=TIMESTAMP}</if>
+        </where>
+    </select>
+
+
+    <!--公共按主键更新数据 -->
+    <update id="updateById" parameterType="com.platform.entity.OrderOrigin">
+		update
+order_origin set
+fp_userid_=#{userId,jdbcType=INTEGER},
+fd_content=#{content,jdbcType=VARCHAR},
+ fd_begin_time=#{beginTime,jdbcType=TIMESTAMP},
+ fd_end_time=#{endTime,jdbcType=TIMESTAMP},
+ fd_update_time=now()
+where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+
+    <!--公共保存方法 -->
+    <insert id="save" parameterType="com.platform.entity.OrderOrigin">
+        insert into order_origin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">fp_userid_,</if>
+            <if test="beginTime != null">fd_begin_time,</if>
+            <if test="endTime != null">fd_end_time,</if>
+            <if test="content != null">fd_content,</if>
+            fd_create_time,
+            fd_update_time
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">#{userId,jdbcType=INTEGER},</if>
+            <if test="beginTime != null ">#{beginTime,jdbcType=TIMESTAMP},</if>
+            <if test="endTime != null ">#{endTime,jdbcType=TIMESTAMP},</if>
+            <if test="content != null ">#{content,jdbcType=VARCHAR},</if>
+            now(),
+            now()
+        </trim>
+    </insert>
+
+
+    <!--公共根据主键删除数据 -->
+    <delete id="removeById"
+            parameterType="java.lang.String">delete from order_origin where id = #{id,jdbcType=INTEGER}</delete>
+    <!--公共更新单条记录 -->
+    <update id="update" parameterType="com.platform.entity.OrderOrigin">
+        update order_origin
+        <set>
+            <if test="userId!= null">fp_userid_=#{userId,jdbcType=INTEGER},</if>
+            <if test="beginTime!= null">fd_begin_time=#{beginTime,jdbcType=TIMESTAMP},</if>
+            <if test="endTime!= null">fd_end_time=#{endTime,jdbcType=TIMESTAMP},</if>
+            <if test="content != null ">fd_content=#{content,jdbcType=VARCHAR},</if>
+            fd_update_time=now()
+        </set>
+        where id= #{id,jdbcType=INTEGER}
+    </update>
+    <!--公共方法结束 自定义方法开始 -->
+
+    <!--批量新增-->
+    <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        insert into order_origin(id,fp_userid_,fd_begin_time,fd_end_time,fd_content,fd_create_time,fd_update_time) values
+        <foreach collection="OrderOriginList" separator="," item="orderOrigin">
+            (#{orderOrigin.userId},#{orderOrigin.beginTime},#{orderOrigin.endTime},#{orderOrigin.content},now(),now())
+        </foreach>
+    </insert>
+    <!--获取最大的查询结束时间-->
+    <select id="getMaxEndTime" resultType="java.util.Date">
+        select max(fd_end_time) from order_origin
+    </select>
+    <!--获取最小的查询开始时间-->
+    <select id="getMinBeginTime" resultType="java.util.Date">
+        select min(fd_begin_time) from order_origin
+    </select>
+
+    <!--获取beginTime一段时间的数据用于解析-->
+    <select id="listBegin" parameterType="com.platform.entity.OrderOrigin" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from order_origin
+        where fd_begin_time <![CDATA[ >= ]]> #{beginTimeStart}
+        and fd_begin_time <![CDATA[ <= ]]> #{beginTimeEnd}
+    </select>
+</mapper>

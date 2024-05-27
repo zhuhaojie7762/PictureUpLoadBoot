@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.dao.OrderStatusResultDAO">
+    <resultMap id="BaseResultMap"
+               type="com.platform.entity.OrderStatusResult">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <id column="fp_userid_" property="userId" jdbcType="INTEGER"/>
+        <result column="fd_shop_name" property="shopName" jdbcType="VARCHAR"/>
+        <result column="fd_shop_nick" property="shopNick" jdbcType="VARCHAR"/>
+        <result column="fd_storage_code" property="storageCode" jdbcType="VARCHAR"/>
+        <result column="fd_storage_name" property="storageName" jdbcType="VARCHAR"/>
+        <result column="fd_trade_no" property="tradeNo" jdbcType="VARCHAR"/>
+        <result column="fd_oln_status" property="olnStatus.code" jdbcType="INTEGER"/>
+        <result column="fd_status" property="status.code" jdbcType="VARCHAR"/>
+        <result column="fd_seller_msg" property="sellerMsg" jdbcType="VARCHAR"/>
+        <result column="fd_buyer_msg" property="buyerMsg" jdbcType="VARCHAR"/>
+        <result column="fd_remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="fd_create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="fd_modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+        <result column="fd_send_time" property="sendTime" jdbcType="TIMESTAMP"/>
+        <result column="fd_pay_time" property="payTime" jdbcType="TIMESTAMP"/>
+        <result column="fd_is_pay" property="pay" jdbcType="BOOLEAN"/>
+        <result column="fd_oln_order_list" property="olnOrderStr" jdbcType="VARCHAR"/>
+        <result column="fd_buyer" property="buyer" jdbcType="VARCHAR"/>
+        <result column="fd_buyer_account" property="buyerAccount" jdbcType="VARCHAR"/>
+        <result column="fd_phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="fd_receiver" property="receiver" jdbcType="VARCHAR"/>
+        <result column="fd_province" property="province" jdbcType="VARCHAR"/>
+        <result column="fd_city" property="city" jdbcType="VARCHAR"/>
+        <result column="fd_district" property="district" jdbcType="VARCHAR"/>
+        <result column="fd_address" property="address" jdbcType="VARCHAR"/>
+        <result column="fd_zip" property="zip" jdbcType="VARCHAR"/>
+        <result column="fd_is_exception_trade" property="exceptionTrade" jdbcType="BOOLEAN"/>
+        <result column="fd_tp_tid" property="tpTid" jdbcType="VARCHAR"/>
+        <result column="fd_source_platform" property="sourcePlatform" jdbcType="VARCHAR"/>
+        <result column="fd_sum_sale" property="sumSale" jdbcType="DOUBLE"/>
+        <result column="fd_post_fee" property="postFee" jdbcType="DOUBLE"/>
+        <result column="fd_paid_fee" property="paidFee" jdbcType="DOUBLE"/>
+        <result column="fd_discount_fee" property="discountFee" jdbcType="DOUBLE"/>
+        <result column="fd_service_fee" property="serviceFee" jdbcType="DOUBLE"/>
+        <result column="fd_has_refund" property="hasRefund" jdbcType="INTEGER"/>
+        <result column="fd_is_small_trade" property="smallTrade" jdbcType="INTEGER"/>
+        <result column="fd_tel" property="tel" jdbcType="VARCHAR"/>
+        <result column="fd_process_status" property="processStatus" jdbcType="VARCHAR"/>
+        <result column="fd_logistic_code" property="logisticCode" jdbcType="VARCHAR"/>
+        <result column="fd_express_code" property="expressCode" jdbcType="VARCHAR"/>
+        <result column="fd_identity_num" property="identityNum" jdbcType="VARCHAR"/>
+        <!--一对多-->
+        <collection property="orders" ofType="com.platform.entity.OpenOrder" select="getOrders" column="tpTid">
+        </collection>
+    </resultMap>
+    <!--基础列 -->
+    <sql id="Base_Column_List">
+		 id,
+		 fp_userid_,
+  fd_shop_name  ,
+  fd_shop_nick  ,
+  fd_storage_code  ,
+  fd_storage_name  ,
+  fd_trade_no  ,
+  fd_oln_status  ,
+  fd_status  ,
+  fd_seller_msg,
+  fd_buyer_msg ,
+  fd_remark  ,
+  fd_create_time  ,
+  fd_modify_time  ,
+  fd_send_time ,
+  fd_pay_time  ,
+  fd_is_pay  ,
+  fd_oln_order_list  ,
+  fd_buyer  ,
+  fd_buyer_account  ,
+  fd_phone  ,
+  fd_receiver  ,
+  fd_province  ,
+  fd_city  ,
+  fd_district  ,
+  fd_address  ,
+  fd_zip  ,
+  fd_is_exception_trade  ,
+  fd_tp_tid  ,
+  fd_source_platform  ,
+  fd_sum_sale  ,
+  fd_post_fee  ,
+  fd_paid_fee  ,
+  fd_discount_fee  ,
+  fd_service_fee  ,
+  fd_has_refund  ,
+  fd_is_small_trade  ,
+  fd_tel  ,
+  fd_process_status  ,
+  fd_logistic_code  ,
+  fd_express_code  ,
+  fd_identity_num  ,
+  fd_record_create_time  ,
+  fd_record_update_time
+	</sql>
+
+
+    <sql id="Base_Column_ListOne">
+  fp_userid_,
+  fd_shop_name  ,
+  fd_shop_nick  ,
+  fd_storage_code  ,
+  fd_storage_name  ,
+  fd_trade_no  ,
+  fd_oln_status  ,
+  fd_status  ,
+  fd_seller_msg,
+  fd_buyer_msg ,
+  fd_remark  ,
+  fd_create_time  ,
+  fd_modify_time  ,
+  fd_send_time ,
+  fd_pay_time  ,
+  fd_is_pay  ,
+  fd_oln_order_list  ,
+  fd_buyer  ,
+  fd_buyer_account  ,
+  fd_phone  ,
+  fd_receiver  ,
+  fd_province  ,
+  fd_city  ,
+  fd_district  ,
+  fd_address  ,
+  fd_zip  ,
+  fd_is_exception_trade  ,
+  fd_tp_tid  ,
+  fd_source_platform  ,
+  fd_sum_sale  ,
+  fd_post_fee  ,
+  fd_paid_fee  ,
+  fd_discount_fee  ,
+  fd_service_fee  ,
+  fd_has_refund  ,
+  fd_is_small_trade  ,
+  fd_tel  ,
+  fd_process_status  ,
+  fd_logistic_code  ,
+  fd_express_code  ,
+  fd_identity_num  ,
+  fd_record_create_time
+ /*fd_record_update_time*/
+	</sql>
+
+
+    <sql id="Base_OpenOrder_Column_List">
+        id,
+        fp_userid_,
+  fd_item_name  ,
+  fd_payment  ,
+  fd_price  ,
+  fd_receivable  ,
+  fd_size  ,
+  fd_sku_code  ,
+  fd_tp_tid  ,
+  fd_oln_item_id  ,
+  fd_oln_status  ,
+  fd_oln_sku_id  ,
+  fd_status  ,
+  fd_order_id  ,
+  fd_oln_item_name  ,
+  fd_create_time  ,
+  fd_update_time
+    </sql>
+    <sql id="Base_OpenOrder_Column_ListOne">
+        /*id,*/
+        fp_userid_,
+  fd_item_name  ,
+  fd_payment  ,
+  fd_price  ,
+  fd_receivable  ,
+  fd_size  ,
+  fd_sku_code  ,
+  fd_tp_tid  ,
+  fd_oln_item_id  ,
+  fd_oln_status  ,
+  fd_oln_sku_id  ,
+  fd_status  ,
+  fd_order_id  ,
+  fd_oln_item_name  ,
+  fd_create_time
+ /* fd_update_time*/
+    </sql>
+
+    <!--公共按主键进行查询 -->
+    <select id="selectById" resultMap="BaseResultMap"
+            parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from order_status_result where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <!--公共列表方法 -->
+    <select id="list" resultMap="BaseResultMap"
+            parameterType="com.platform.entity.OrderStatusResult">
+        select
+        <include refid="Base_Column_List"/>
+        from order_status_result
+        <where>
+            <if test="id!=null">id=#{id,jdbcType=VARCHAR}</if>
+            <if test="userId!=null">and fp_userid_=#{userId,jdbcType=INTEGER}</if>
+            <if test="shopName!=null">and fd_shop_name=#{shopName,jdbcType=VARCHAR}</if>
+            <if test="shopNick!=null">and fd_shop_nick=#{shopNick,jdbcType=VARCHAR}</if>
+            <if test="storageCode!=null ">and fd_storage_code=#{storageCode,jdbcType=VARCHAR}</if>
+            <if test="storageName !=null ">and fd_storage_name=#{storageName,jdbcType=VARCHAR}</if>
+            <if test="tradeNo !=null ">and fd_trade_no=#{tradeNo,jdbcType=VARCHAR}</if>
+            <if test="olnStatus!=null">and fd_oln_status=#{olnStatus.code,jdbcType=INTEGER}</if>
+            <if test="status!=null">and fd_status=#{status.code,jdbcType=VARCHAR}</if>
+            <if test="sellerMsg!=null ">and fd_seller_msg=#{sellerMsg,jdbcType=VARCHAR}</if>
+            <if test="buyerMsg !=null ">and fd_buyer_msg=#{buyerMsg,jdbcType=VARCHAR}</if>
+            <if test="remark !=null ">and fd_remark=#{remark,jdbcType=VARCHAR}</if>
+            <if test="createTime!=null">and fd_create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+            <if test="modifyTime!=null">and fd_modify_time=#{modifyTime,jdbcType=TIMESTAMP}</if>
+            <if test="sendTime!=null">and fd_send_time=#{sendTime,jdbcType=TIMESTAMP}</if>
+            <if test="payTime!=null">and fd_pay_time=#{payTime,jdbcType=TIMESTAMP}</if>
+            <if test="pay!=null ">and fd_is_pay=#{pay,jdbcType=BOOLEAN}</if>
+            <if test="olnOrderStr!=null">and fd_oln_order_list=#{olnOrderStr,jdbcType=VARCHAR}</if>
+            <if test="buyer !=null ">and fd_buyer=#{buyer,jdbcType=VARCHAR}</if>
+            <if test="buyerAccount!=null">and fd_buyer_account=#{buyerAccount,jdbcType=VARCHAR}</if>
+            <if test="phone!=null">and fd_phone=#{phone,jdbcType=VARCHAR}</if>
+            <if test="receiver!=null ">and fd_receiver=#{receiver,jdbcType=VARCHAR}</if>
+            <if test="province !=null ">and fd_province=#{province,jdbcType=VARCHAR}</if>
+            <if test="city !=null ">and fd_city=#{city,jdbcType=VARCHAR}</if>
+            <if test="district!=null">and fd_district=#{district,jdbcType=VARCHAR}</if>
+            <if test="address!=null">and fd_address=#{address,jdbcType=VARCHAR}</if>
+            <if test="zip!=null ">and fd_zip=#{zip,jdbcType=VARCHAR}</if>
+            <if test="exceptionTrade !=null ">and fd_is_exception_trade=#{exceptionTrade,jdbcType=BOOLEAN}</if>
+            <if test="tpTid !=null ">and fd_tp_tid=#{tpTid,jdbcType=VARCHAR}</if>
+            <if test="sourcePlatform!=null">and fd_source_platform=#{sourcePlatform,jdbcType=VARCHAR}</if>
+            <if test="sumSale!=null">and fd_sum_sale=#{sumSale,jdbcType=DOUBLE}</if>
+            <if test="postFee!=null">and fd_post_fee=#{postFee,jdbcType=DOUBLE}</if>
+            <if test="paidFee!=null">and fd_paid_fee=#{paidFee,jdbcType=DOUBLE}</if>
+            <if test="discountFee!=null">and fd_discount_fee=#{discountFee,jdbcType=DOUBLE}</if>
+            <if test="serviceFee!=null">and fd_service_fee=#{serviceFee,jdbcType=DOUBLE}</if>
+            <if test="hasRefund!=null ">and fd_has_refund=#{hasRefund,jdbcType=INTEGER}</if>
+            <if test="smallTrade!=null ">and fd_is_small_trade=#{smallTrade,jdbcType=INTEGER}</if>
+            <if test="tel!=null ">and fd_tel=#{tel,jdbcType=VARCHAR}</if>
+            <if test="processStatus!=null">and fd_process_status=#{processStatus,jdbcType=VARCHAR}</if>
+            <if test="logisticCode!=null">and fd_logistic_code=#{logisticCode,jdbcType=VARCHAR}</if>
+            <if test="expressCode!=null ">and fd_express_code=#{expressCode,jdbcType=VARCHAR}</if>
+            <if test="identityNum!=null ">and fd_identity_num=#{identityNum,jdbcType=VARCHAR}</if>
+        </where>
+    </select>
+
+
+    <delete id="delete" parameterType="com.platform.entity.OrderStatusResult">
+        delete from order_status_result
+        <where>
+            <if test="id!=null">id=#{id,jdbcType=VARCHAR}</if>
+            <if test="userId!=null">and fp_userid_=#{userId,jdbcType=INTEGER}</if>
+            <if test="shopName!=null">and fd_shop_name=#{shopName,jdbcType=VARCHAR}</if>
+            <if test="shopNick!=null">and fd_shop_nick=#{shopNick,jdbcType=VARCHAR}</if>
+            <if test="storageCode!=null ">and fd_storage_code=#{storageCode,jdbcType=VARCHAR}</if>
+            <if test="storageName !=null ">and fd_storage_name=#{storageName,jdbcType=VARCHAR}</if>
+            <if test="tradeNo !=null ">and fd_trade_no=#{tradeNo,jdbcType=VARCHAR}</if>
+            <if test="olnStatus!=null">and fd_oln_status=#{olnStatus.code,jdbcType=INTEGER}</if>
+            <if test="status!=null">and fd_status=#{status.code,jdbcType=VARCHAR}</if>
+            <if test="sellerMsg!=null ">and fd_seller_msg=#{sellerMsg,jdbcType=VARCHAR}</if>
+            <if test="buyerMsg !=null ">and fd_buyer_msg=#{buyerMsg,jdbcType=VARCHAR}</if>
+            <if test="remark !=null ">and fd_remark=#{remark,jdbcType=VARCHAR}</if>
+            <if test="createTime!=null">and fd_create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+            <if test="modifyTime!=null">and fd_modify_time=#{modifyTime,jdbcType=TIMESTAMP}</if>
+            <if test="sendTime!=null">and fd_send_time=#{sendTime,jdbcType=TIMESTAMP}</if>
+            <if test="payTime!=null">and fd_pay_time=#{payTime,jdbcType=TIMESTAMP}</if>
+            <if test="pay!=null ">and fd_is_pay=#{pay,jdbcType=BOOLEAN}</if>
+            <if test="olnOrderStr!=null ">and fd_oln_order_list=#{olnOrderStr,jdbcType=VARCHAR}</if>
+            <if test="buyer !=null ">and fd_buyer=#{buyer,jdbcType=VARCHAR}</if>
+            <if test="buyerAccount!=null">and fd_buyer_account=#{buyerAccount,jdbcType=VARCHAR}</if>
+            <if test="phone!=null">and fd_phone=#{phone,jdbcType=VARCHAR}</if>
+            <if test="receiver!=null ">and fd_receiver=#{receiver,jdbcType=VARCHAR}</if>
+            <if test="province !=null ">and fd_province=#{province,jdbcType=VARCHAR}</if>
+            <if test="city !=null ">and fd_city=#{city,jdbcType=VARCHAR}</if>
+            <if test="district!=null">and fd_district=#{district,jdbcType=VARCHAR}</if>
+            <if test="address!=null">and fd_address=#{address,jdbcType=VARCHAR}</if>
+            <if test="zip!=null ">and fd_zip=#{zip,jdbcType=VARCHAR}</if>
+            <if test="exceptionTrade !=null ">and fd_is_exception_trade=#{exceptionTrade,jdbcType=BOOLEAN}</if>
+            <if test="tpTid !=null ">and fd_tp_tid=#{tpTid,jdbcType=VARCHAR}</if>
+            <if test="sourcePlatform!=null">and fd_source_platform=#{sourcePlatform,jdbcType=VARCHAR}</if>
+            <if test="sumSale!=null">and fd_sum_sale=#{sumSale,jdbcType=DOUBLE}</if>
+            <if test="postFee!=null">and fd_post_fee=#{postFee,jdbcType=DOUBLE}</if>
+            <if test="paidFee!=null">and fd_paid_fee=#{paidFee,jdbcType=DOUBLE}</if>
+            <if test="discountFee!=null">and fd_discount_fee=#{discountFee,jdbcType=DOUBLE}</if>
+            <if test="serviceFee!=null">and fd_service_fee=#{serviceFee,jdbcType=DOUBLE}</if>
+            <if test="hasRefund!=null ">and fd_has_refund=#{hasRefund,jdbcType=INTEGER}</if>
+            <if test="smallTrade!=null ">and fd_is_small_trade=#{smallTrade,jdbcType=INTEGER}</if>
+            <if test="tel!=null ">and fd_tel=#{tel,jdbcType=VARCHAR}</if>
+            <if test="processStatus!=null">and fd_process_status=#{processStatus,jdbcType=VARCHAR}</if>
+            <if test="logisticCode!=null">and fd_logistic_code=#{logisticCode,jdbcType=VARCHAR}</if>
+            <if test="expressCode!=null ">and fd_express_code=#{expressCode,jdbcType=VARCHAR}</if>
+            <if test="identityNum!=null ">and fd_identity_num=#{identityNum,jdbcType=VARCHAR}</if>
+        </where>
+    </delete>
+
+    <!--公共get方法 -->
+    <select id="get" resultMap="BaseResultMap"
+            parameterType="com.platform.entity.OrderStatusResult">
+        select
+        <include refid="Base_Column_List"/>
+        from order_status_result
+        <where>
+            <if test="id!=null">id=#{id,jdbcType=VARCHAR}</if>
+            <if test="userId!=null">and fp_userid_=#{userId,jdbcType=INTEGER}</if>
+            <if test="shopName!=null">and fd_shop_name=#{shopName,jdbcType=VARCHAR}</if>
+            <if test="shopNick!=null">and fd_shop_nick=#{shopNick,jdbcType=VARCHAR}</if>
+            <if test="storageCode!=null ">and fd_storage_code=#{storageCode,jdbcType=VARCHAR}</if>
+            <if test="storageName !=null ">and fd_storage_name=#{storageName,jdbcType=VARCHAR}</if>
+            <if test="tradeNo !=null ">and fd_trade_no=#{tradeNo,jdbcType=VARCHAR}</if>
+            <if test="olnStatus!=null">and fd_oln_status=#{olnStatus.code,jdbcType=INTEGER}</if>
+            <if test="status!=null">and fd_status=#{status.code,jdbcType=VARCHAR}</if>
+            <if test="sellerMsg!=null ">and fd_seller_msg=#{sellerMsg,jdbcType=VARCHAR}</if>
+            <if test="buyerMsg !=null ">and fd_buyer_msg=#{buyerMsg,jdbcType=VARCHAR}</if>
+            <if test="remark !=null ">and fd_remark=#{remark,jdbcType=VARCHAR}</if>
+            <if test="createTime!=null">and fd_create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+            <if test="modifyTime!=null">and fd_modify_time=#{modifyTime,jdbcType=TIMESTAMP}</if>
+            <if test="sendTime!=null">and fd_send_time=#{sendTime,jdbcType=TIMESTAMP}</if>
+            <if test="payTime!=null">and fd_pay_time=#{payTime,jdbcType=TIMESTAMP}</if>
+            <if test="pay!=null ">and fd_is_pay=#{pay,jdbcType=BOOLEAN}</if>
+            <if test="olnOrderStr!=null ">and fd_oln_order_list=#{olnOrderStr,jdbcType=VARCHAR}</if>
+            <if test="buyer !=null ">and fd_buyer=#{buyer,jdbcType=VARCHAR}</if>
+            <if test="buyerAccount!=null">and fd_buyer_account=#{buyerAccount,jdbcType=VARCHAR}</if>
+            <if test="phone!=null">and fd_phone=#{phone,jdbcType=VARCHAR}</if>
+            <if test="receiver!=null ">and fd_receiver=#{receiver,jdbcType=VARCHAR}</if>
+            <if test="province !=null ">and fd_province=#{province,jdbcType=VARCHAR}</if>
+            <if test="city !=null ">and fd_city=#{city,jdbcType=VARCHAR}</if>
+            <if test="district!=null">and fd_district=#{district,jdbcType=VARCHAR}</if>
+            <if test="address!=null">and fd_address=#{address,jdbcType=VARCHAR}</if>
+            <if test="zip!=null ">and fd_zip=#{zip,jdbcType=VARCHAR}</if>
+            <if test="exceptionTrade !=null ">and fd_is_exception_trade=#{exceptionTrade,jdbcType=BOOLEAN}</if>
+            <if test="tpTid !=null ">and fd_tp_tid=#{tpTid,jdbcType=VARCHAR}</if>
+            <if test="sourcePlatform!=null">and fd_source_platform=#{sourcePlatform,jdbcType=VARCHAR}</if>
+            <if test="sumSale!=null">and fd_sum_sale=#{sumSale,jdbcType=DOUBLE}</if>
+            <if test="postFee!=null">and fd_post_fee=#{postFee,jdbcType=DOUBLE}</if>
+            <if test="paidFee!=null">and fd_paid_fee=#{paidFee,jdbcType=DOUBLE}</if>
+            <if test="discountFee!=null">and fd_discount_fee=#{discountFee,jdbcType=DOUBLE}</if>
+            <if test="serviceFee!=null">and fd_service_fee=#{serviceFee,jdbcType=DOUBLE}</if>
+            <if test="hasRefund!=null ">and fd_has_refund=#{hasRefund,jdbcType=INTEGER}</if>
+            <if test="smallTrade!=null ">and fd_is_small_trade=#{smallTrade,jdbcType=INTEGER}</if>
+            <if test="tel!=null ">and fd_tel=#{tel,jdbcType=VARCHAR}</if>
+            <if test="processStatus!=null">and fd_process_status=#{processStatus,jdbcType=VARCHAR}</if>
+            <if test="logisticCode!=null">and fd_logistic_code=#{logisticCode,jdbcType=VARCHAR}</if>
+            <if test="expressCode!=null ">and fd_express_code=#{expressCode,jdbcType=VARCHAR}</if>
+            <if test="identityNum!=null ">and fd_identity_num=#{identityNum,jdbcType=VARCHAR}</if>
+        </where>
+    </select>
+
+
+    <!--公共按主键更新数据 -->
+    <update id="updateById" parameterType="com.platform.entity.OrderStatusResult">
+		update
+order_status_result set
+        fp_userid_=#{userId,jdbcType=INTEGER},
+        fd_shop_name=#{shopName,jdbcType=VARCHAR},
+        fd_shop_nick=#{shopNick,jdbcType=VARCHAR},
+        fd_storage_code=#{storageCode,jdbcType=VARCHAR},
+        fd_storage_name=#{storageName,jdbcType=VARCHAR},
+        fd_trade_no=#{tradeNo,jdbcType=VARCHAR},
+        fd_oln_status=#{olnStatus.code,jdbcType=INTEGER},
+        fd_status=#{status.code,jdbcType=VARCHAR},
+        fd_seller_msg=#{sellerMsg,jdbcType=VARCHAR},
+        fd_buyer_msg=#{buyerMsg,jdbcType=VARCHAR},
+        fd_remark=#{remark,jdbcType=VARCHAR},
+        fd_create_time=#{createTime,jdbcType=TIMESTAMP},
+        fd_modify_time=#{modifyTime,jdbcType=TIMESTAMP},
+        fd_send_time=#{sendTime,jdbcType=TIMESTAMP},
+        fd_pay_time=#{payTime,jdbcType=TIMESTAMP},
+        fd_is_pay=#{pay,jdbcType=BOOLEAN},
+        fd_oln_order_list=#{olnOrderStr,jdbcType=VARCHAR},
+        fd_buyer=#{buyer,jdbcType=VARCHAR},
+        fd_buyer_account=#{buyerAccount,jdbcType=VARCHAR},
+       fd_phone=#{phone,jdbcType=VARCHAR},
+        fd_receiver=#{receiver,jdbcType=VARCHAR},
+        fd_province=#{province,jdbcType=VARCHAR},
+        fd_city=#{city,jdbcType=VARCHAR},
+        fd_district=#{district,jdbcType=VARCHAR},
+       fd_address=#{address,jdbcType=VARCHAR},
+        fd_zip=#{zip,jdbcType=VARCHAR},
+        fd_is_exception_trade=#{exceptionTrade,jdbcType=BOOLEAN},
+        fd_tp_tid=#{tpTid,jdbcType=VARCHAR},
+        fd_source_platform=#{sourcePlatform,jdbcType=VARCHAR},
+        fd_sum_sale=#{sumSale,jdbcType=DOUBLE},
+        fd_post_fee=#{postFee,jdbcType=DOUBLE},
+        fd_paid_fee=#{paidFee,jdbcType=DOUBLE},
+        fd_discount_fee=#{discountFee,jdbcType=DOUBLE},
+        fd_service_fee=#{serviceFee,jdbcType=DOUBLE},
+        fd_has_refund=#{hasRefund,jdbcType=INTEGER},
+        fd_is_small_trade=#{smallTrade,jdbcType=INTEGER},
+        fd_tel=#{tel,jdbcType=VARCHAR},
+        fd_process_status=#{processStatus,jdbcType=VARCHAR},
+        fd_logistic_code=#{logisticCode,jdbcType=VARCHAR},
+         fd_express_code=#{expressCode,jdbcType=VARCHAR},
+        fd_identity_num=#{identityNum,jdbcType=VARCHAR},
+        fd_update_time=now()
+where id = #{id,jdbcType=INTEGER}
+	</update>
+
+
+    <!--公共保存方法 -->
+    <insert id="save" parameterType="com.platform.entity.OrderStatusResult">
+        insert into order_status_result
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="userId!=null">fp_userid_,</if>
+            <if test="shopName!=null">fd_shop_name,</if>
+            <if test="shopNick!=null">fd_shop_nick,</if>
+            <if test="storageCode!=null ">fd_storage_code,</if>
+            <if test="storageName !=null ">fd_storage_name,</if>
+            <if test="tradeNo !=null ">fd_trade_no,</if>
+            <if test="olnStatus!=null">fd_oln_status,</if>
+            <if test="status!=null">fd_status,</if>
+            <if test="sellerMsg!=null ">fd_seller_msg,</if>
+            <if test="buyerMsg !=null ">fd_buyer_msg,</if>
+            <if test="remark !=null ">fd_remark,</if>
+            <if test="createTime!=null">fd_create_time,</if>
+            <if test="modifyTime!=null">fd_modify_time,</if>
+            <if test="sendTime!=null">fd_send_time,</if>
+            <if test="payTime!=null">fd_pay_time,</if>
+            <if test="pay!=null ">fd_is_pay,</if>
+            <if test="olnOrderStr!=null ">fd_oln_order_list,</if>
+            <if test="buyer !=null ">fd_buyer,</if>
+            <if test="buyerAccount!=null">fd_buyer_account,</if>
+            <if test="phone!=null">fd_phone,</if>
+            <if test="receiver!=null ">fd_receiver,</if>
+            <if test="province !=null ">fd_province,</if>
+            <if test="city !=null ">fd_city,</if>
+            <if test="district!=null">fd_district,</if>
+            <if test="address!=null">fd_address,</if>
+            <if test="zip!=null ">fd_zip,</if>
+            <if test="exceptionTrade !=null ">fd_is_exception_trade,</if>
+            <if test="tpTid !=null ">fd_tp_tid,</if>
+            <if test="sourcePlatform!=null">fd_source_platform,</if>
+            <if test="sumSale!=null">fd_sum_sale,</if>
+            <if test="postFee!=null">fd_post_fee,</if>
+            <if test="paidFee!=null">fd_paid_fee,</if>
+            <if test="discountFee!=null">fd_discount_fee,</if>
+            <if test="serviceFee!=null">fd_service_fee,</if>
+            <if test="hasRefund!=null ">fd_has_refund,</if>
+            <if test="smallTrade!=null ">fd_is_small_trade,</if>
+            <if test="tel!=null ">fd_tel,</if>
+            <if test="processStatus!=null">fd_process_status,</if>
+            <if test="logisticCode!=null">fd_logistic_code,</if>
+            <if test="expressCode!=null ">fd_express_code,</if>
+            <if test="identityNum!=null ">fd_identity_num,</if>
+            fd_record_create_time,
+            fd_record_update_time
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null ">#{id,jdbcType=INTEGER},</if>
+            <if test="userId!=null">#{userId,jdbcType=INTEGER},</if>
+            <if test="shopName!=null">#{shopName,jdbcType=VARCHAR},</if>
+            <if test="shopNick!=null">#{shopNick,jdbcType=VARCHAR},</if>
+            <if test="storageCode!=null ">#{storageCode,jdbcType=VARCHAR},</if>
+            <if test="storageName !=null ">#{storageName,jdbcType=VARCHAR},</if>
+            <if test="tradeNo !=null ">#{tradeNo,jdbcType=VARCHAR},</if>
+            <if test="olnStatus!=null">#{olnStatus.code,jdbcType=INTEGER},</if>
+            <if test="status!=null">#{status.code,jdbcType=VARCHAR},</if>
+            <if test="sellerMsg!=null ">#{sellerMsg,jdbcType=VARCHAR},</if>
+            <if test="buyerMsg !=null ">#{buyerMsg,jdbcType=VARCHAR},</if>
+            <if test="remark !=null ">#{remark,jdbcType=VARCHAR},</if>
+            <if test="createTime!=null">#{createTime,jdbcType=TIMESTAMP},</if>
+            <if test="modifyTime!=null">#{modifyTime,jdbcType=TIMESTAMP},</if>
+            <if test="sendTime!=null">#{sendTime,jdbcType=TIMESTAMP},</if>
+            <if test="payTime!=null">#{payTime,jdbcType=TIMESTAMP},</if>
+            <if test="pay!=null ">#{pay,jdbcType=BOOLEAN},</if>
+            <if test="olnOrderStr!=null ">#{olnOrderStr,jdbcType=VARCHAR},</if>
+            <if test="buyer !=null ">#{buyer,jdbcType=VARCHAR},</if>
+            <if test="buyerAccount!=null">#{buyerAccount,jdbcType=VARCHAR},</if>
+            <if test="phone!=null">#{phone,jdbcType=VARCHAR},</if>
+            <if test="receiver!=null ">#{receiver,jdbcType=VARCHAR},</if>
+            <if test="province !=null ">#{province,jdbcType=VARCHAR},</if>
+            <if test="city !=null ">#{city,jdbcType=VARCHAR},</if>
+            <if test="district!=null">#{district,jdbcType=VARCHAR},</if>
+            <if test="address!=null">#{address,jdbcType=VARCHAR},</if>
+            <if test="zip!=null ">#{zip,jdbcType=VARCHAR},</if>
+            <if test="exceptionTrade !=null ">#{exceptionTrade,jdbcType=BOOLEAN},</if>
+            <if test="tpTid !=null ">#{tpTid,jdbcType=VARCHAR},</if>
+            <if test="sourcePlatform!=null">#{sourcePlatform,jdbcType=VARCHAR},</if>
+            <if test="sumSale!=null">#{sumSale,jdbcType=DOUBLE},</if>
+            <if test="postFee!=null">#{postFee,jdbcType=DOUBLE},</if>
+            <if test="paidFee!=null">#{paidFee,jdbcType=DOUBLE},</if>
+            <if test="discountFee!=null">#{discountFee,jdbcType=DOUBLE},</if>
+            <if test="serviceFee!=null">#{serviceFee,jdbcType=DOUBLE},</if>
+            <if test="hasRefund!=null ">#{hasRefund,jdbcType=INTEGER},</if>
+            <if test="smallTrade!=null ">#{smallTrade,jdbcType=INTEGER},</if>
+            <if test="tel!=null ">#{tel,jdbcType=VARCHAR},</if>
+            <if test="processStatus!=null">#{processStatus,jdbcType=VARCHAR},</if>
+            <if test="logisticCode!=null">#{logisticCode,jdbcType=VARCHAR},</if>
+            <if test="expressCode!=null ">#{expressCode,jdbcType=VARCHAR},</if>
+            <if test="identityNum!=null ">#{identityNum,jdbcType=VARCHAR},</if>
+            now(),
+            now()
+        </trim>
+    </insert>
+
+
+    <!--公共根据主键删除数据 -->
+    <delete id="removeById"
+            parameterType="java.lang.Integer">delete from order_status_result where id = #{id,jdbcType=INTEGER}</delete>
+
+
+    <!--公共更新单条记录 -->
+    <update id="update" parameterType="com.platform.entity.OrderStatusResult">
+        update order_status_result
+        <set>
+            <trim suffixOverrides=",">
+                <if test="userId!=null">fp_userid_=#{userId,jdbcType=INTEGER},</if>
+                <if test="shopName!=null">fd_shop_name=#{orderStatus.shopName,jdbcType=VARCHAR},</if>
+                <if test="shopNick!=null">fd_shop_nick=#{orderStatus.shopNick,jdbcType=VARCHAR},</if>
+                <if test="storageCode!=null ">fd_storage_code=#{orderStatus.storageCode,jdbcType=VARCHAR},</if>
+                <if test="storageName !=null ">fd_storage_name=#{orderStatus.storageName,jdbcType=VARCHAR},</if>
+                <if test="tradeNo !=null ">fd_trade_no=#{orderStatus.tradeNo,jdbcType=VARCHAR},</if>
+                <if test="olnStatus!=null">fd_oln_status=#{orderStatus.olnStatus.code,jdbcType=INTEGER},</if>
+                <if test="status!=null">fd_status=#{orderStatus.status.code,jdbcType=VARCHAR},</if>
+                <if test="sellerMsg!=null ">fd_seller_msg=#{orderStatus.sellerMsg,jdbcType=VARCHAR},</if>
+                <if test="buyerMsg !=null ">fd_buyer_msg=#{orderStatus.buyerMsg,jdbcType=VARCHAR},</if>
+                <if test="remark !=null ">fd_remark=#{orderStatus.remark,jdbcType=VARCHAR},</if>
+                <if test="createTime!=null">fd_create_time=#{orderStatus.createTime,jdbcType=TIMESTAMP},</if>
+                <if test="modifyTime!=null">fd_modify_time=#{orderStatus.modifyTime,jdbcType=TIMESTAMP},</if>
+                <if test="sendTime!=null">fd_send_time=#{orderStatus.sendTime,jdbcType=TIMESTAMP},</if>
+                <if test="payTime!=null">fd_pay_time=#{orderStatus.payTime,jdbcType=TIMESTAMP},</if>
+                <if test="pay!=null ">fd_is_pay=#{orderStatus.pay,jdbcType=BOOLEAN},</if>
+                <if test="olnOrderStr!=null ">fd_oln_order_list=#{orderStatus.olnOrderStr,jdbcType=VARCHAR},</if>
+                <if test="buyer !=null ">fd_buyer=#{orderStatus.buyer,jdbcType=VARCHAR},</if>
+                <if test="buyerAccount!=null">fd_buyer_account=#{orderStatus.buyerAccount,jdbcType=VARCHAR},</if>
+                <if test="phone!=null">fd_phone=#{phone,jdbcType=VARCHAR},</if>
+                <if test="receiver!=null ">fd_receiver=#{orderStatus.receiver,jdbcType=VARCHAR},</if>
+                <if test="province !=null ">fd_province=#{orderStatus.province,jdbcType=VARCHAR},</if>
+                <if test="city !=null ">fd_city=#{orderStatus.city,jdbcType=VARCHAR},</if>
+                <if test="district!=null">fd_district=#{orderStatus.district,jdbcType=VARCHAR},</if>
+                <if test="address!=null">fd_address=#{orderStatus.address,jdbcType=VARCHAR},</if>
+                <if test="zip!=null ">fd_zip=#{orderStatus.zip,jdbcType=VARCHAR},</if>
+                <if test="exceptionTrade !=null ">fd_is_exception_trade=#{exceptionTrade,jdbcType=BOOLEAN},</if>
+                <if test="tpTid !=null ">fd_tp_tid=#{orderStatus.tpTid,jdbcType=VARCHAR},</if>
+                <if test="sourcePlatform!=null">fd_source_platform=#{orderStatus.sourcePlatform,jdbcType=VARCHAR},</if>
+                <if test="sumSale!=null">fd_sum_sale=#{orderStatus.sumSale,jdbcType=DOUBLE},</if>
+                <if test="postFee!=null">fd_post_fee=#{orderStatus.postFee,jdbcType=DOUBLE},</if>
+                <if test="paidFee!=null">fd_paid_fee=#{orderStatus.paidFee,jdbcType=DOUBLE},</if>
+                <if test="discountFee!=null">fd_discount_fee=#{orderStatus.discountFee,jdbcType=DOUBLE},</if>
+                <if test="serviceFee!=null">fd_service_fee=#{orderStatus.serviceFee,jdbcType=DOUBLE},</if>
+                <if test="hasRefund!=null ">fd_has_refund=#{orderStatus.hasRefund,jdbcType=INTEGER},</if>
+                <if test="smallTrade!=null ">fd_is_small_trade=#{orderStatus.smallTrade,jdbcType=INTEGER},</if>
+                <if test="tel!=null ">fd_tel=#{orderStatus.tel,jdbcType=VARCHAR},</if>
+                <if test="processStatus!=null">fd_process_status=#{orderStatus.processStatus,jdbcType=VARCHAR},</if>
+                <if test="logisticCode!=null">fd_logistic_code=#{orderStatus.logisticCode,jdbcType=VARCHAR},</if>
+                <if test="expressCode!=null ">fd_express_code=#{orderStatus.expressCode,jdbcType=VARCHAR},</if>
+                <if test="identityNum!=null ">fd_identity_num=#{orderStatus.identityNum,jdbcType=VARCHAR},</if>
+                fd_record_update_time=now(),
+            </trim>
+        </set>
+        where id= #{id,jdbcType=INTEGER}
+    </update>
+    <!--公共方法结束 自定义方法开始 -->
+
+
+    <!--查询订单-->
+    <select id="getOrders" parameterType="string" resultType="com.platform.entity.OpenOrder">
+        select
+        <include refid="Base_OpenOrder_Column_List"/>
+        from open_order s
+        where s.fd_tp_tid = #{tpTid}
+    </select>
+
+
+    <!--批量新增  或者修改 根据FD_TRADE_NO, FD_TP_TID
+     useGeneratedKeys="true" keyProperty="id" -->
+    <insert id="saveOrUpdateBatch" parameterType="java.util.List">
+        <!--insert into order_status_result-->
+        replace into order_status_result
+        (<include refid="Base_Column_ListOne"/>)
+        values
+        <trim suffixOverrides=",">
+            <foreach collection="OrderStatusList" separator="," item="orderStatus">
+                (
+                #{orderStatus.userId},
+                #{orderStatus.shopName},
+                #{orderStatus.shopNick},
+                #{orderStatus.storageCode},
+                #{orderStatus.storageName},
+                #{orderStatus.tradeNo},
+                #{orderStatus.olnStatus.code},
+                #{orderStatus.status.code},
+                #{orderStatus.sellerMsg},
+                #{orderStatus.buyerMsg},
+                #{orderStatus.remark},
+                #{orderStatus.createTime},
+                #{orderStatus.modifyTime},
+                #{orderStatus.sendTime},
+                #{orderStatus.payTime},
+                #{orderStatus.pay},
+                #{orderStatus.olnOrderStr},
+                #{orderStatus.buyer},
+                #{orderStatus.buyerAccount},
+                #{orderStatus.phone},
+                #{orderStatus.receiver},
+                #{orderStatus.province},
+                #{orderStatus.city},
+                #{orderStatus.district},
+                #{orderStatus.address},
+                #{orderStatus.zip},
+                #{orderStatus.exceptionTrade},
+                #{orderStatus.tpTid},
+                #{orderStatus.sourcePlatform},
+                #{orderStatus.sumSale},
+                #{orderStatus.postFee},
+                #{orderStatus.paidFee},
+                #{orderStatus.discountFee},
+                #{orderStatus.serviceFee},
+                #{orderStatus.hasRefund},
+                #{orderStatus.smallTrade},
+                #{orderStatus.tel},
+                #{orderStatus.processStatus},
+                #{orderStatus.logisticCode},
+                #{orderStatus.expressCode},
+                #{orderStatus.identityNum},
+                now())
+            </foreach>
+        </trim>
+    </insert>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into order_status_result
+        (<include refid="Base_Column_ListOne"/>)
+        values
+        <trim suffixOverrides=",">
+            <foreach collection="OrderStatusList" separator="," item="orderStatus">
+                (
+                #{orderStatus.userId},
+                #{orderStatus.shopName},
+                #{orderStatus.shopNick},
+                #{orderStatus.storageCode},
+                #{orderStatus.storageName},
+                #{orderStatus.tradeNo},
+                #{orderStatus.olnStatus.code},
+                #{orderStatus.status.code},
+                #{orderStatus.sellerMsg},
+                #{orderStatus.buyerMsg},
+                #{orderStatus.remark},
+                #{orderStatus.createTime},
+                #{orderStatus.modifyTime},
+                #{orderStatus.sendTime},
+                #{orderStatus.payTime},
+                #{orderStatus.pay},
+                #{orderStatus.olnOrderStr},
+                #{orderStatus.buyer},
+                #{orderStatus.buyerAccount},
+                #{orderStatus.phone},
+                #{orderStatus.receiver},
+                #{orderStatus.province},
+                #{orderStatus.city},
+                #{orderStatus.district},
+                #{orderStatus.address},
+                #{orderStatus.zip},
+                #{orderStatus.exceptionTrade},
+                #{orderStatus.tpTid},
+                #{orderStatus.sourcePlatform},
+                #{orderStatus.sumSale},
+                #{orderStatus.postFee},
+                #{orderStatus.paidFee},
+                #{orderStatus.discountFee},
+                #{orderStatus.serviceFee},
+                #{orderStatus.hasRefund},
+                #{orderStatus.smallTrade},
+                #{orderStatus.tel},
+                #{orderStatus.processStatus},
+                #{orderStatus.logisticCode},
+                #{orderStatus.expressCode},
+                #{orderStatus.identityNum},
+                now())
+            </foreach>
+        </trim>
+    </insert>
+
+
+    <!-- 批量更新第一种方法，通过接收传进来的参数list进行循环着组装sql -->
+    <update id="updateBatch" parameterType="java.util.List">
+        <!-- 接收list参数，循环着组装sql语句，注意for循环的写法
+             separator=";" 代表着每次循环完，在sql后面放一个分号
+             item="orderStatus" 循环List的每条的结果集
+             collection="OrderStatusList" list 即为 map传过来的参数key -->
+        <foreach collection="OrderStatusList" separator=";" item="orderStatus">
+            update order_status_result set
+            <trim suffixOverrides=",">
+                <if test="orderStatus.userId!=null">fp_userid_=#{orderStatus.userId,jdbcType=INTEGER},</if>
+                <if test="orderStatus.shopName!=null">fd_shop_name=#{orderStatus.shopName,jdbcType=VARCHAR},</if>
+                <if test="orderStatus.shopNick!=null">fd_shop_nick=#{orderStatus.shopNick,jdbcType=VARCHAR},</if>
+                <if test="orderStatus.storageCode!=null ">fd_storage_code=#{orderStatus.storageCode,jdbcType=VARCHAR},
+                </if>
+                <if test="orderStatus.storageName !=null ">
+                    fd_storage_name=#{orderStatus.storageName,jdbcType=VARCHAR},
+                </if>
+                <if test="orderStatus.tradeNo !=null ">fd_trade_no=#{orderStatus.tradeNo,jdbcType=VARCHAR},</if>
+                <if test="orderStatus.olnStatus!=null">fd_oln_status=#{orderStatus.olnStatus.code,jdbcType=INTEGER},
+                </if>
+                <if test="orderStatus.status!=null">fd_status=#{orderStatus.status.code,jdbcType=VARCHAR},</if>
+                <if test="orderStatus.sellerMsg!=null ">fd_seller_msg=#{orderStatus.sellerMsg,jdbcType=VARCHAR},</if>
+                <if test="orderStatus.buyerMsg !=null ">fd_buyer_msg=#{orderStatus.buyerMsg,jdbcType=VARCHAR},</if>
+                <if test="orderStatus.remark !=null ">fd_remark=#{orderStatus.remark,jdbcType=VARCHAR},</if>
+                <if test="orderStatus.createTime!=null">fd_create_time=#{orderStatus.createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="orderStatus.modifyTime!=null">fd_modify_time=#{orderStatus.modifyTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="orderStatus.sendTime!=null">fd_send_time=#{orderStatus.sendTime,jdbcType=TIMESTAMP},</if>
+                <if test="orderStatus.payTime!=null">fd_pay_time=#{orderStatus.payTime,jdbcType=TIMESTAMP},</if>
+                <if test="orderStatus.pay!=null ">fd_is_pay=#{orderStatus.pay,jdbcType=BOOLEAN},</if>
+                <if test="orderStatus.olnOrderStr!=null ">
+                    fd_oln_order_list=#{orderStatus.olnOrderStr,jdbcType=VARCHAR},
+                </if>
+                <if test="orderStatus.buyer !=null ">fd_buyer=#{orderStatus.buyer,jdbcType=VARCHAR},</if>
+                <if test="orderStatus.buyerAccount!=null">
+                    fd_buyer_account=#{orderStatus.buyerAccount,jdbcType=VARCHAR},
+                </if>
+                <if test="orderStatus.phone!=null">fd_phone=#{phone,jdbcType=VARCHAR},</if>
+                <if test="orderStatus.receiver!=null ">fd_receiver=#{orderStatus.receiver,jdbcType=VARCHAR},</if>
+                <if test="orderStatus.province !=null ">fd_province=#{orderStatus.province,jdbcType=VARCHAR},</if>
+                <if test="orderStatus.city !=null ">fd_city=#{orderStatus.city,jdbcType=VARCHAR},</if>
+                <if test="orderStatus.district!=null">fd_district=#{orderStatus.district,jdbcType=VARCHAR},</if>
+                <if test="orderStatus.address!=null">fd_address=#{orderStatus.address,jdbcType=VARCHAR},</if>
+                <if test="orderStatus.zip!=null ">fd_zip=#{orderStatus.zip,jdbcType=VARCHAR},</if>
+                <if test="orderStatus.exceptionTrade !=null ">
+                    fd_is_exception_trade=#{exceptionTrade,jdbcType=BOOLEAN},
+                </if>
+                <if test="orderStatus.tpTid !=null ">fd_tp_tid=#{orderStatus.tpTid,jdbcType=VARCHAR},</if>
+                <if test="orderStatus.sourcePlatform!=null">
+                    fd_source_platform=#{orderStatus.sourcePlatform,jdbcType=VARCHAR},
+                </if>
+                <if test="orderStatus.sumSale!=null">fd_sum_sale=#{orderStatus.sumSale,jdbcType=DOUBLE},</if>
+                <if test="orderStatus.postFee!=null">fd_post_fee=#{orderStatus.postFee,jdbcType=DOUBLE},</if>
+                <if test="orderStatus.paidFee!=null">fd_paid_fee=#{orderStatus.paidFee,jdbcType=DOUBLE},</if>
+                <if test="orderStatus.discountFee!=null">fd_discount_fee=#{orderStatus.discountFee,jdbcType=DOUBLE},
+                </if>
+                <if test="orderStatus.serviceFee!=null">fd_service_fee=#{orderStatus.serviceFee,jdbcType=DOUBLE},</if>
+                <if test="orderStatus.hasRefund!=null ">fd_has_refund=#{orderStatus.hasRefund,jdbcType=INTEGER},</if>
+                <if test="orderStatus.smallTrade!=null ">fd_is_small_trade=#{orderStatus.smallTrade,jdbcType=INTEGER},
+                </if>
+                <if test="orderStatus.tel!=null ">fd_tel=#{orderStatus.tel,jdbcType=VARCHAR},</if>
+                <if test="orderStatus.processStatus!=null">
+                    fd_process_status=#{orderStatus.processStatus,jdbcType=VARCHAR},
+                </if>
+                <if test="orderStatus.logisticCode!=null">
+                    fd_logistic_code=#{orderStatus.logisticCode,jdbcType=VARCHAR},
+                </if>
+                <if test="orderStatus.expressCode!=null ">fd_express_code=#{orderStatus.expressCode,jdbcType=VARCHAR},
+                </if>
+                <if test="orderStatus.identityNum!=null ">fd_identity_num=#{orderStatus.identityNum,jdbcType=VARCHAR},
+                </if>
+                fd_record_update_time=now(),
+            </trim>
+            where fd_trade_no = #{orderStatus.tradeNo}
+        </foreach>
+    </update>
+
+    <!--&lt;!&ndash;批量同时更新或者新增两张表&ndash;&gt;-->
+    <!--<insert id="saveOrUpdateResultAndDetailBatch" parameterType="map">-->
+        <!--begin-->
+        <!--replace into order_status_result-->
+        <!--(<include refid="Base_Column_ListOne"/>)-->
+        <!--values-->
+        <!--<trim suffixOverrides=",">-->
+            <!--<foreach collection="map.orderStatusList" separator="," item="orderStatus">-->
+                <!--(-->
+                <!--#{orderStatus.userId},-->
+                <!--#{orderStatus.shopName},-->
+                <!--#{orderStatus.shopNick},-->
+                <!--#{orderStatus.storageCode},-->
+                <!--#{orderStatus.storageName},-->
+                <!--#{orderStatus.tradeNo},-->
+                <!--#{orderStatus.olnStatus.code},-->
+                <!--#{orderStatus.status.code},-->
+                <!--#{orderStatus.sellerMsg},-->
+                <!--#{orderStatus.buyerMsg},-->
+                <!--#{orderStatus.remark},-->
+                <!--#{orderStatus.createTime},-->
+                <!--#{orderStatus.modifyTime},-->
+                <!--#{orderStatus.sendTime},-->
+                <!--#{orderStatus.payTime},-->
+                <!--#{orderStatus.pay},-->
+                <!--#{orderStatus.olnOrderStr},-->
+                <!--#{orderStatus.buyer},-->
+                <!--#{orderStatus.buyerAccount},-->
+                <!--#{orderStatus.phone},-->
+                <!--#{orderStatus.receiver},-->
+                <!--#{orderStatus.province},-->
+                <!--#{orderStatus.city},-->
+                <!--#{orderStatus.district},-->
+                <!--#{orderStatus.address},-->
+                <!--#{orderStatus.zip},-->
+                <!--#{orderStatus.exceptionTrade},-->
+                <!--#{orderStatus.tpTid},-->
+                <!--#{orderStatus.sourcePlatform},-->
+                <!--#{orderStatus.sumSale},-->
+                <!--#{orderStatus.postFee},-->
+                <!--#{orderStatus.paidFee},-->
+                <!--#{orderStatus.discountFee},-->
+                <!--#{orderStatus.serviceFee},-->
+                <!--#{orderStatus.hasRefund},-->
+                <!--#{orderStatus.smallTrade},-->
+                <!--#{orderStatus.tel},-->
+                <!--#{orderStatus.processStatus},-->
+                <!--#{orderStatus.logisticCode},-->
+                <!--#{orderStatus.expressCode},-->
+                <!--#{orderStatus.identityNum},-->
+                <!--now())-->
+            <!--</foreach>-->
+        <!--</trim>-->
+        <!--end;-->
+        <!--begin-->
+        <!--replace into open_order-->
+        <!--(<include refid="Base_OpenOrder_Column_ListOne"/>)-->
+        <!--values-->
+        <!--<trim suffixOverrides=",">-->
+            <!--<foreach collection="map.openOrderList" separator="," item="openOrder">-->
+                <!--(-->
+                <!--#{openOrder.userId},-->
+                <!--#{openOrder.itemName},-->
+                <!--#{openOrder.payment},-->
+                <!--#{openOrder.price},-->
+                <!--#{openOrder.receivable},-->
+                <!--#{openOrder.size},-->
+                <!--#{openOrder.skuCode},-->
+                <!--#{openOrder.tpTid},-->
+                <!--#{openOrder.olnItemId},-->
+                <!--#{openOrder.olnStatus},-->
+                <!--#{openOrder.olnSkuId},-->
+                <!--#{openOrder.status},-->
+                <!--#{openOrder.orderId},-->
+                <!--#{openOrder.olnItemName},-->
+                <!--now())-->
+            <!--</foreach>-->
+        <!--</trim>-->
+        <!--end;-->
+    <!--</insert>-->
+
+
+</mapper>

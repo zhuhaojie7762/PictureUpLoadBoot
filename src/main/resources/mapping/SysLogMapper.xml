@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.dao.SysLogDAO">
+	<resultMap id="BaseResultMap" type="com.platform.entity.SysLog">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="ip" property="ip" jdbcType="VARCHAR" />
+		<result column="session_id" property="sessionId" jdbcType="VARCHAR" />
+		<result column="brower_name" property="browerName" jdbcType="VARCHAR" />
+		<result column="brower_message" property="browerMessage" jdbcType="VARCHAR"
+			/>
+		<result column="request_url" property="requestUrl" jdbcType="VARCHAR" />
+		<result column="request_param" property="requestParam" jdbcType="VARCHAR"
+			/>
+		<result column="exception_name" property="exceptionName" jdbcType="VARCHAR"
+			/>
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+
+	</resultMap>
+	<!--基础列 -->
+	<sql id="Base_Column_List">
+		id, ip, session_id, brower_name, brower_message, request_url, request_param,
+exception_name,
+			user_name, status, create_time
+	</sql>
+
+	<!--公共按主键进行查询 -->
+	<select id="selectById" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from sys_log where id = #{id,jdbcType=VARCHAR}
+	</select>
+
+
+
+	<!--公共列表方法 -->
+	<select id="list" resultMap="BaseResultMap"
+		parameterType="com.platform.entity.SysLog">
+		select
+		<include refid="Base_Column_List" />
+		from sys_log
+		<where>
+			<if test="id!=null">id=#{id,jdbcType=VARCHAR}</if>
+			<if test="ip!=null">and ip=#{ip,jdbcType=VARCHAR}</if>
+			<if test="sessionId!=null">and session_id=#{sessionId,jdbcType=VARCHAR}</if>
+			<if test="browerName!=null ">and brower_name=#{browerName,jdbcType=VARCHAR}</if>
+			<if test="browerMessage !=null ">and brower_message=#{browerMessage,jdbcType=VARCHAR}</if>
+			<if test="requestUrl !=null ">and request_url=#{requestUrl,jdbcType=VARCHAR}</if>
+			<if test="requestParam !=null ">and request_param=#{request_param,jdbcType=VARCHAR}</if>
+			<if test="exceptionName!=null ">and exception_name=#{exceptionName,jdbcType=VARCHAR}</if>
+			<if test="userName !=null ">and user_name=#{userName,jdbcType=VARCHAR}</if>
+			<if test="status !=null ">and status=#{status,jdbcType=VARCHAR}</if>
+			<if test="createTime !=null ">and create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+		</where>
+	</select>
+
+
+	<delete id="delete" parameterType="com.platform.entity.SysLog">
+		delete from sys_log
+		<where>
+			<if test="id!=null">id=#{id,jdbcType=VARCHAR}</if>
+			<if test="ip!=null">and ip=#{ip,jdbcType=VARCHAR}</if>
+			<if test="sessionId!=null">and session_id=#{sessionId,jdbcType=VARCHAR}</if>
+			<if test="browerName!=null ">and brower_name=#{browerName,jdbcType=VARCHAR}</if>
+			<if test="browerMessage !=null ">and brower_message=#{browerMessage,jdbcType=VARCHAR}</if>
+			<if test="requestUrl !=null ">and request_url=#{requestUrl,jdbcType=VARCHAR}</if>
+			<if test="requestParam !=null ">and request_param=#{request_param,jdbcType=VARCHAR}</if>
+			<if test="exceptionName!=null ">and exception_name=#{exceptionName,jdbcType=VARCHAR}</if>
+			<if test="userName !=null ">and user_name=#{userName,jdbcType=VARCHAR}</if>
+			<if test="status !=null ">and status=#{status,jdbcType=VARCHAR}</if>
+			<if test="createTime !=null ">and create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+		</where>
+	</delete>
+
+	<!--公共get方法 -->
+	<select id="get" resultMap="BaseResultMap"
+		parameterType="com.platform.entity.SysLog">
+		select
+		<include refid="Base_Column_List" />
+		from sys_log
+		<where>
+			<if test="id!=null">id=#{id,jdbcType=VARCHAR}</if>
+			<if test="ip!=null">and ip=#{ip,jdbcType=VARCHAR}</if>
+			<if test="sessionId!=null">and session_id=#{sessionId,jdbcType=VARCHAR}</if>
+			<if test="browerName!=null ">and brower_name=#{browerName,jdbcType=VARCHAR}</if>
+			<if test="browerMessage !=null ">and brower_message=#{browerMessage,jdbcType=VARCHAR}</if>
+			<if test="requestUrl !=null ">and request_url=#{requestUrl,jdbcType=VARCHAR}</if>
+			<if test="requestParam !=null ">and request_param=#{request_param,jdbcType=VARCHAR}</if>
+			<if test="exceptionName!=null ">and exception_name=#{exceptionName,jdbcType=VARCHAR}</if>
+			<if test="userName !=null ">and user_name=#{userName,jdbcType=VARCHAR}</if>
+			<if test="status !=null ">and status=#{status,jdbcType=VARCHAR}</if>
+			<if test="createTime !=null ">and create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+		</where>
+	</select>
+
+
+	<!--公共按主键更新数据 -->
+	<update id="updateById" parameterType="com.platform.entity.SysLog">
+		update
+sys_log set
+ip=#{ip,jdbcType=VARCHAR}, session_id=#{sessionId,jdbcType=VARCHAR},
+brower_name=#{browerName,jdbcType=VARCHAR},
+brower_message=#{browerMessage,jdbcType=VARCHAR},
+request_url=#{requestUrl,jdbcType=VARCHAR},
+request_param=#{requestParam,jdbcType=VARCHAR},
+exception_name=#{exceptionName,jdbcType=VARCHAR},
+user_name=#{userName,jdbcType=VARCHAR},
+status=#{status,jdbcType=VARCHAR},
+create_time
+=
+now()
+where
+			id = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<!--公共保存方法 -->
+	<insert id="save" parameterType="com.platform.entity.SysLog">
+		insert into sys_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>
+			<if test="ip != null">ip,</if>
+			<if test="browerName != null">brower_name,</if>
+			<if test="browerMessage != null">brower_message,</if>
+			<if test="requestUrl != null ">request_url,</if>
+			<if test="requestParam != null">request_param,</if>
+			<if test="exceptionName != null">exception_name,</if>
+			<if test="userName != null">user_name,</if>
+			<if test="status != null">status,</if>
+			create_time
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null ">#{id,jdbcType=VARCHAR},</if>
+			<if test="ip != null ">#{ip,jdbcType=VARCHAR},</if>
+			<if test="browerName != null ">#{browerName,jdbcType=VARCHAR},</if>
+			<if test="browerMessage != null ">#{browerMessage,jdbcType=VARCHAR},</if>
+			<if test="requestUrl != null ">#{requestUrl,jdbcType=VARCHAR},</if>
+			<if test="requestParam != null ">#{requestParam,jdbcType=VARCHAR},</if>
+			<if test="exceptionName != null ">#{exceptionName,jdbcType=VARCHAR},</if>
+			<if test="userName != null ">#{userName,jdbcType=VARCHAR},</if>
+			<if test="status != null ">#{status,jdbcType=VARCHAR},</if>
+			now()
+		</trim>
+	</insert>
+
+
+
+	<!--公共根据主键删除数据 -->
+	<delete id="removeById" parameterType="java.lang.String">delete from sys_log where id = #{id,jdbcType=VARCHAR}</delete>
+
+
+
+	<!--公共更新单条记录 -->
+	<update id="update" parameterType="com.platform.entity.SysLog">
+		update sys_log
+		<set>
+			<if test="ip != null ">ip=#{ip,jdbcType=VARCHAR},</if>
+			<if test="sessionId != null ">session_id=#{sessionId,jdbcType=VARCHAR},</if>
+			<if test="browerName != null ">brower_name=#{browerName,jdbcType=VARCHAR},</if>
+			<if test="browerMessage != null ">brower_message=#{browerMessage,jdbcType=VARCHAR},</if>
+			<if test="requestUrl != null ">request_url=#{requestUrl,jdbcType=VARCHAR},</if>
+			<if test="requestParam != null ">request_param=#{requestParam,jdbcType=VARCHAR},</if>
+			<if test="exceptionName != null ">exception_name=#{exceptionName,jdbcType=VARCHAR},</if>
+			<if test="userName != null ">user_name=#{userName,jdbcType=VARCHAR},</if>
+			<if test="status != null ">status=#{status,jdbcType=VARCHAR},</if>
+			create_time=now()
+		</set>
+		where id= #{id,jdbcType=VARCHAR}
+	</update>
+	<!--公共方法结束 自定义方法开始 -->
+</mapper>

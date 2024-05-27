@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.dao.SysUserDAO">
+    <resultMap id="BaseResultMap" type="com.platform.entity.SysUser">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+    <!--基础列 -->
+    <sql id="Base_Column_List">
+        id, name, password, create_time, real_name, email, phone_number, remark
+    </sql>
+
+    <!--公共按主键进行查询 -->
+    <select id="selectById" resultMap="BaseResultMap"
+            parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+
+    <!--公共列表方法 -->
+    <select id="list" resultMap="BaseResultMap"
+            parameterType="com.platform.entity.SysUser">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        <where>
+            <if test="id!=null">id=#{id,jdbcType=VARCHAR}</if>
+            <if test="name!=null">and name=#{name,jdbcType=VARCHAR}</if>
+            <if test="password!=null">and password=#{password,jdbcType=VARCHAR}</if>
+            <if test="createTime!=null ">and create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+            <if test="realName !=null ">and real_name=#{realName,jdbcType=VARCHAR}</if>
+            <if test="email !=null ">and email=#{email,jdbcType=VARCHAR}</if>
+            <if test="phoneNumber !=null ">and phone_number=#{phoneNumber,jdbcType=VARCHAR}</if>
+            <if test="remark !=null ">and remark=#{remark,jdbcType=VARCHAR}</if>
+        </where>
+    </select>
+
+
+    <delete id="delete" parameterType="com.platform.entity.SysUser">
+        delete from sys_user
+        <where>
+            <if test="id!=null">id=#{id,jdbcType=VARCHAR}</if>
+            <if test="name!=null">and name=#{name,jdbcType=VARCHAR}</if>
+            <if test="password!=null">and password=#{password,jdbcType=VARCHAR}</if>
+            <if test="createTime!=null ">and create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+            <if test="realName !=null ">and real_name=#{realName,jdbcType=VARCHAR}</if>
+            <if test="email !=null ">and email=#{email,jdbcType=VARCHAR}</if>
+            <if test="phoneNumber !=null ">and phone_number=#{phoneNumber,jdbcType=VARCHAR}</if>
+            <if test="remark !=null ">and remark=#{remark,jdbcType=VARCHAR}</if>
+        </where>
+    </delete>
+
+    <!--公共get方法 -->
+    <select id="get" resultMap="BaseResultMap"
+            parameterType="com.platform.entity.SysUser">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        <where>
+            <if test="id!=null">id=#{id,jdbcType=VARCHAR}</if>
+            <if test="name!=null">and name=#{name,jdbcType=VARCHAR}</if>
+            <if test="password!=null">and password=#{password,jdbcType=VARCHAR}</if>
+            <if test="createTime!=null ">and create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+            <if test="realName !=null ">and real_name=#{realName,jdbcType=VARCHAR}</if>
+            <if test="email !=null ">and email=#{email,jdbcType=VARCHAR}</if>
+            <if test="phoneNumber !=null ">and phone_number=#{phoneNumber,jdbcType=VARCHAR}</if>
+            <if test="remark !=null ">and remark=#{remark,jdbcType=VARCHAR}</if>
+        </where>
+    </select>
+
+
+    <!--公共按主键更新数据 -->
+    <update id="updateById" parameterType="com.platform.entity.SysUser">
+        update
+        sys_user set
+        name=#{name,jdbcType=VARCHAR}, password=#{password,jdbcType=VARCHAR},
+        real_name=#{realName,jdbcType=VARCHAR},
+        email=#{email,jdbcType=VARCHAR},
+        phone_number=#{phoneNumber,jdbcType=VARCHAR},
+        create_time
+        = now(), remark=#{remark,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+
+    <!--公共保存方法 -->
+    <insert id="save" parameterType="com.platform.entity.SysUser">
+        insert into sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null">name,</if>
+            <if test=" password!= null">password,</if>
+            <if test="realName != null">real_name,</if>
+            <if test="email != null ">email,</if>
+            <if test="phoneNumber != null ">phone_number</if>
+            create_time,
+            <if test="remark != null ">remark</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null ">#{id,jdbcType=VARCHAR},</if>
+            <if test="name!=null">and name=#{name,jdbcType=VARCHAR}</if>
+            <if test="password!=null">and password=#{password,jdbcType=VARCHAR}</if>
+            <if test="realName !=null ">and real_name=#{realName,jdbcType=VARCHAR}</if>
+            <if test="email !=null ">and email=#{email,jdbcType=VARCHAR}</if>
+            <if test="phoneNumber !=null ">and phone_number=#{phoneNumber,jdbcType=VARCHAR}</if>
+            now(),
+            <if test="remark != null ">#{remark,jdbcType=VARCHAR}</if>
+        </trim>
+    </insert>
+
+
+    <!--公共根据主键删除数据 -->
+    <delete id="removeById" parameterType="java.lang.String">delete from sys_user where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+
+    <!--公共更新单条记录 -->
+    <update id="update" parameterType="com.platform.entity.SysUser">
+        update sys_user
+        <set>
+            <if test="name!=null">name=#{name,jdbcType=VARCHAR},</if>
+            <if test="password!=null">password=#{password,jdbcType=VARCHAR},</if>
+            <if test="realName !=null ">real_name=#{realName,jdbcType=VARCHAR},</if>
+            <if test="email !=null ">email=#{email,jdbcType=VARCHAR},</if>
+            <if test="phoneNumber !=null ">phone_number=#{phoneNumber,jdbcType=VARCHAR},</if>
+            createtime=now(),
+            <if test="remark != null">remark=#{remark,jdbcType=VARCHAR}</if>
+        </set>
+        where id= #{id,jdbcType=VARCHAR}
+    </update>
+    <!--公共方法结束 自定义方法开始 -->
+
+
+</mapper>

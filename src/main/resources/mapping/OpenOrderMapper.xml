@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.dao.OpenOrderDAO">
+    <resultMap id="BaseResultMap"
+               type="com.platform.entity.OpenOrder">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="fp_userid_" property="userId" jdbcType="INTEGER"/>
+        <result column="fd_item_name" property="itemName" jdbcType="VARCHAR"/>
+        <result column="fd_payment" property="payment" jdbcType="DOUBLE"/>
+        <result column="fd_price" property="price" jdbcType="DOUBLE"/>
+        <result column="fd_receivable" property="receivable" jdbcType="DOUBLE"/>
+        <result column="fd_size" property="size" jdbcType="INTEGER"/>
+        <result column="fd_sku_code" property="skuCode" jdbcType="VARCHAR"/>
+        <result column="fd_tp_tid" property="tpTid" jdbcType="VARCHAR"/>
+        <result column="fd_oln_item_id" property="olnItemId" jdbcType="VARCHAR"/>
+        <result column="fd_oln_status" property="olnStatus" jdbcType="INTEGER"/>
+        <result column="fd_oln_sku_id" property="olnSkuId" jdbcType="VARCHAR"/>
+        <result column="fd_oln_item_name" property="olnItemName" jdbcType="VARCHAR"/>
+        <result column="fd_create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="fd_update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <!--基础列 -->
+    <sql id="Base_Column_List">
+	id,
+	fp_userid_,
+  fd_item_name ,
+  fd_payment ,
+  fd_price,
+  fd_receivable,
+  fd_size,
+  fd_sku_code,
+  fd_tp_tid,
+  fd_oln_item_id,
+  fd_oln_status,
+  fd_oln_sku_id,
+  fd_status,
+  fd_order_id,
+  fd_oln_item_name,
+  fd_create_time,
+  fd_update_time
+	</sql>
+
+    <sql id="Base_Column_ListOne">
+fp_userid_,
+  fd_item_name ,
+  fd_payment ,
+  fd_price,
+  fd_receivable,
+  fd_size,
+  fd_sku_code,
+  fd_tp_tid,
+  fd_oln_item_id,
+  fd_oln_status,
+  fd_oln_sku_id,
+  fd_status,
+  fd_order_id,
+  fd_oln_item_name,
+  fd_create_time
+	</sql>
+
+    <!--公共按主键进行查询 -->
+    <select id="selectById" resultMap="BaseResultMap"
+            parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from open_order where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <!--公共列表方法 -->
+    <select id="list" resultMap="BaseResultMap"
+            parameterType="com.platform.entity.OpenOrder">
+        select
+        <include refid="Base_Column_List"/>
+        from open_order
+        <where>
+            <if test="id!=null">id=#{id,jdbcType=INTEGER}</if>
+            <if test="userId!=null">and fp_userid_=#{userId,jdbcType=INTEGER}</if>
+            <if test="itemName!=null">and fd_item_name=#{itemName,jdbcType=VARCHAR}</if>
+            <if test="payment!=null">and fd_payment=#{payment,jdbcType=DOUBLE}</if>
+            <if test="price!=null">and fd_price=#{price,jdbcType=DOUBLE}</if>
+            <if test="receivable!=null">and ft_receivable=#{receivable,jdbcType=DOUBLE}</if>
+            <if test="size!=null">and ft_size=#{size,jdbcType=INTEGER}</if>
+            <if test="skuCode!=null">and fd_sku_code=#{skuCode,jdbcType=VARCHAR}</if>
+            <if test="tpTid!=null">and fd_tp_tid=#{tpTid,jdbcType=VARCHAR}</if>
+            <if test="olnItemId!=null">and fd_oln_item_id=#{olnItemId,jdbcType=VARCHAR}</if>
+            <if test="olnStatus!=null">and fd_oln_status=#{olnStatus,jdbcType=INTEGER}</if>
+            <if test="olnSkuId!=null">and fd_oln_sku_id=#{olnSkuId,jdbcType=VARCHAR}</if>
+            <if test="status!=null">and fd_status=#{status,jdbcType=INTEGER}</if>
+            <if test="orderId!=null">and fd_order_id=#{orderId,jdbcType=VARCHAR}</if>
+            <if test="olnItemName!=null">and fd_oln_item_name=#{olnItemName,jdbcType=VARCHAR}</if>
+            <if test="createTime!=null ">and fd_create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+            <if test="updateTime!=null ">and fd_update_time=#{updateTime,jdbcType=TIMESTAMP}</if>
+        </where>
+    </select>
+
+
+    <delete id="delete" parameterType="com.platform.entity.OpenOrder">
+        delete from open_order
+        <where>
+            <if test="id!=null">id=#{id,jdbcType=INTEGER}</if>
+            <if test="userId!=null">and fp_userid_=#{userId,jdbcType=INTEGER}</if>
+            <if test="itemName!=null">and fd_item_name=#{itemName,jdbcType=VARCHAR}</if>
+            <if test="payment!=null">and fd_payment=#{payment,jdbcType=DOUBLE}</if>
+            <if test="price!=null">and fd_price=#{price,jdbcType=DOUBLE}</if>
+            <if test="receivable!=null">and ft_receivable=#{receivable,jdbcType=DOUBLE}</if>
+            <if test="size!=null">and ft_size=#{size,jdbcType=INTEGER}</if>
+            <if test="skuCode!=null">and fd_sku_code=#{skuCode,jdbcType=VARCHAR}</if>
+            <if test="tpTid!=null">and fd_tp_tid=#{tpTid,jdbcType=VARCHAR}</if>
+            <if test="olnItemId!=null">and fd_oln_item_id=#{olnItemId,jdbcType=VARCHAR}</if>
+            <if test="olnStatus!=null">and fd_oln_status=#{olnStatus,jdbcType=INTEGER}</if>
+            <if test="olnSkuId!=null">and fd_oln_sku_id=#{olnSkuId,jdbcType=VARCHAR}</if>
+            <if test="status!=null">and fd_status=#{status,jdbcType=INTEGER}</if>
+            <if test="orderId!=null">and fd_order_id=#{orderId,jdbcType=VARCHAR}</if>
+            <if test="olnItemName!=null">and fd_oln_item_name=#{olnItemName,jdbcType=VARCHAR}</if>
+            <if test="createTime!=null ">and fd_create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+            <if test="updateTime!=null ">and fd_update_time=#{updateTime,jdbcType=TIMESTAMP}</if>
+        </where>
+    </delete>
+
+    <!--公共get方法 -->
+    <select id="get" resultMap="BaseResultMap"
+            parameterType="com.platform.entity.OpenOrder">
+        select
+        <include refid="Base_Column_List"/>
+        from open_order
+        <where>
+            <if test="id!=null">id=#{id,jdbcType=INTEGER}</if>
+            <if test="userId!=null">and fp_userid_=#{userId,jdbcType=INTEGER}</if>
+            <if test="itemName!=null">and fd_item_name=#{itemName,jdbcType=VARCHAR}</if>
+            <if test="payment!=null">and fd_payment=#{payment,jdbcType=DOUBLE}</if>
+            <if test="price!=null">and fd_price=#{price,jdbcType=DOUBLE}</if>
+            <if test="receivable!=null">and ft_receivable=#{receivable,jdbcType=DOUBLE}</if>
+            <if test="size!=null">and ft_size=#{size,jdbcType=INTEGER}</if>
+            <if test="skuCode!=null">and fd_sku_code=#{skuCode,jdbcType=VARCHAR}</if>
+            <if test="tpTid!=null">and fd_tp_tid=#{tpTid,jdbcType=VARCHAR}</if>
+            <if test="olnItemId!=null">and fd_oln_item_id=#{olnItemId,jdbcType=VARCHAR}</if>
+            <if test="olnStatus!=null">and fd_oln_status=#{olnStatus,jdbcType=INTEGER}</if>
+            <if test="olnSkuId!=null">and fd_oln_sku_id=#{olnSkuId,jdbcType=VARCHAR}</if>
+            <if test="status!=null">and fd_status=#{status,jdbcType=INTEGER}</if>
+            <if test="orderId!=null">and fd_order_id=#{orderId,jdbcType=VARCHAR}</if>
+            <if test="olnItemName!=null">and fd_oln_item_name=#{olnItemName,jdbcType=VARCHAR}</if>
+            <if test="createTime!=null ">and fd_create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+            <if test="updateTime!=null ">and fd_update_time=#{updateTime,jdbcType=TIMESTAMP}</if>
+        </where>
+    </select>
+
+
+    <!--公共按主键更新数据 -->
+    <update id="updateById" parameterType="com.platform.entity.OpenOrder">
+		update open_order set
+        fp_userid_=#{userId,jdbcType=INTEGER},
+        fd_item_name=#{itemName,jdbcType=VARCHAR},
+        fd_payment=#{payment,jdbcType=DOUBLE},
+        fd_price=#{price,jdbcType=DOUBLE},
+        ft_receivable=#{receivable,jdbcType=DOUBLE},
+        ft_size=#{size,jdbcType=INTEGER},
+        fd_sku_code=#{skuCode,jdbcType=VARCHAR},
+        fd_tp_tid=#{tpTid,jdbcType=VARCHAR},
+        fd_oln_item_id=#{olnItemId,jdbcType=VARCHAR},
+        fd_oln_status=#{olnStatus,jdbcType=INTEGER},
+        fd_oln_sku_id=#{olnSkuId,jdbcType=VARCHAR},
+        fd_status=#{status,jdbcType=INTEGER},
+        fd_order_id=#{orderId,jdbcType=VARCHAR},
+        fd_oln_item_name=#{olnItemName,jdbcType=VARCHAR},
+        fd_update_time=now()
+where id = #{id,jdbcType=INTEGER}
+	</update>
+
+
+    <!--公共保存方法 -->
+    <insert id="save" parameterType="com.platform.entity.OpenOrder">
+        insert into open_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test=" userId!= null">fp_userid_,</if>
+            <if test=" itemName!= null">fd_item_name,</if>
+            <if test=" payment!= null">fd_payment,</if>
+            <if test=" price!= null">fd_price,</if>
+            <if test=" receivable!= null">fd_receivable,</if>
+            <if test=" size!= null">fd_size,</if>
+            <if test=" skuCode!= null">fd_sku_code,</if>
+            <if test=" tpTid!= null">fd_tp_tid,</if>
+            <if test=" olnItemId!= null">fd_oln_item_id,</if>
+            <if test=" olnStatus!= null">fd_oln_status,</if>
+            <if test=" olnSkuId!= null">fd_oln_sku_id,</if>
+            <if test=" status!= null">fd_status,</if>
+            <if test=" orderId!= null">fd_order_id,</if>
+            <if test=" olnItemName!= null">fd_oln_item_name,</if>
+            fd_create_time,
+            fd_update_time
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test=" userId!= null">#{userId,jdbcType=INTEGER},</if>
+            <if test=" itemName!= null">#{itemName,jdbcType=VARCHAR},</if>
+            <if test=" payment!= null">#{payment,jdbcType=DOUBLE},</if>
+            <if test=" price!= null">#{price,jdbcType=DOUBLE},</if>
+            <if test=" receivable!= null">#{receivable,jdbcType=DOUBLE},</if>
+            <if test=" size!= null">#{size,jdbcType=INTEGER},</if>
+            <if test=" skuCode!= null">#{skuCode,jdbcType=VARCHAR},</if>
+            <if test=" tpTid!= null">#{tpTid,jdbcType=VARCHAR},</if>
+            <if test=" olnItemId!= null">#{olnItemId,jdbcType=VARCHAR},</if>
+            <if test=" olnStatus!= null">#{olnStatus,jdbcType=INTEGER},</if>
+            <if test=" olnSkuId!= null">#{olnSkuId,jdbcType=VARCHAR},</if>
+            <if test=" status!= null">#{status,jdbcType=INTEGER},</if>
+            <if test=" orderId!= null">#{orderId,jdbcType=VARCHAR},</if>
+            <if test=" olnItemName!= null">#{olnItemName,jdbcType=VARCHAR},</if>
+            now(),
+            now()
+        </trim>
+    </insert>
+    <!--公共根据主键删除数据 -->
+    <delete id="removeById"
+            parameterType="java.lang.String">delete from open_order where id = #{id,jdbcType=INTEGER}</delete>
+    <!--公共更新单条记录 -->
+    <update id="update" parameterType="com.platform.entity.OpenOrder">
+        update open_order
+        <set>
+            <if test=" userId!= null">#{userId,jdbcType=INTEGER},</if>
+            <if test=" itemName!= null">#{itemName,jdbcType=VARCHAR},</if>
+            <if test=" payment!= null">#{payment,jdbcType=DOUBLE},</if>
+            <if test=" price!= null">#{price,jdbcType=DOUBLE},</if>
+            <if test=" receivable!= null">#{receivable,jdbcType=DOUBLE},</if>
+            <if test=" size!= null">#{size,jdbcType=INTEGER},</if>
+            <if test=" skuCode!= null">#{skuCode,jdbcType=VARCHAR},</if>
+            <if test=" tpTid!= null">#{tpTid,jdbcType=VARCHAR},</if>
+            <if test=" olnItemId!= null">#{olnItemId,jdbcType=VARCHAR},</if>
+            <if test=" olnStatus!= null">#{olnStatus,jdbcType=INTEGER},</if>
+            <if test=" olnSkuId!= null">#{olnSkuId,jdbcType=VARCHAR},</if>
+            <if test=" status!= null">#{status,jdbcType=INTEGER},</if>
+            <if test=" orderId!= null">#{orderId,jdbcType=VARCHAR},</if>
+            <if test=" olnItemName!= null">#{olnItemName,jdbcType=VARCHAR},</if>
+            fd_update_time=now()
+        </set>
+        where id= #{id,jdbcType=INTEGER}
+    </update>
+    <!--公共方法结束 自定义方法开始 -->
+
+
+    <insert id="saveOrUpdateBatch" parameterType="java.util.List">
+        <!--insert into order_status_result-->
+        replace into open_order
+        (<include refid="Base_Column_ListOne"/>)
+        values
+        <trim suffixOverrides=",">
+            <foreach collection="OpenOrderList" separator="," item="openOrder">
+                (
+                #{openOrder.userId},
+                #{openOrder.itemName},
+                #{openOrder.payment},
+                #{openOrder.price},
+                #{openOrder.receivable},
+                #{openOrder.size},
+                #{openOrder.skuCode},
+                #{openOrder.tpTid},
+                #{openOrder.olnItemId},
+                #{openOrder.olnStatus},
+                #{openOrder.olnSkuId},
+                #{openOrder.status},
+                #{openOrder.orderId},
+                #{openOrder.olnItemName},
+                now())
+            </foreach>
+        </trim>
+    </insert>
+</mapper>

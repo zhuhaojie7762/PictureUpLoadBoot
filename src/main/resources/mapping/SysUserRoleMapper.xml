@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.dao.SysUserRoleDAO">
+    <resultMap id="BaseResultMap" type="com.platform.entity.SysUserRole">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="role_id" property="roleId" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <!--基础列 -->
+    <sql id="Base_Column_List">id,
+        user_id,
+        role_id,
+        create_time
+    </sql>
+
+    <!--公共按主键进行查询 -->
+    <select id="selectById" resultMap="BaseResultMap"
+            parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user_role where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+
+    <!--公共列表方法 -->
+    <select id="list" resultMap="BaseResultMap"
+            parameterType="com.platform.entity.SysUserRole">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user_role
+        <where>
+            <if test="id!=null">id=#{id,jdbcType=VARCHAR}</if>
+            <if test="userId!=null">and user_id=#{userId,jdbcType=VARCHAR}</if>
+            <if test="roleId!=null">and role_id=#{roleId,jdbcType=VARCHAR}</if>
+            <if test="createTime!=null ">and create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+        </where>
+    </select>
+
+
+    <delete id="delete" parameterType="com.platform.entity.SysUserRole">
+        delete from sys_user_role
+        <where>
+            <if test="id!=null">id=#{id,jdbcType=VARCHAR}</if>
+            <if test="userId!=null">and user_id=#{userId,jdbcType=VARCHAR}</if>
+            <if test="roleId!=null">and role_id=#{roleId,jdbcType=VARCHAR}</if>
+            <if test="createTime!=null ">and create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+        </where>
+    </delete>
+
+    <!--公共get方法 -->
+    <select id="get" resultMap="BaseResultMap"
+            parameterType="com.platform.entity.SysUserRole">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user_role
+        <where>
+            <if test="id!=null">id=#{id,jdbcType=VARCHAR}</if>
+            <if test="userId!=null">and user_id=#{userId,jdbcType=VARCHAR}</if>
+            <if test="roleId!=null">and role_id=#{roleId,jdbcType=VARCHAR}</if>
+            <if test="createTime!=null ">and create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+        </where>
+    </select>
+
+
+    <!--公共按主键更新数据 -->
+    <update id="updateById" parameterType="com.platform.entity.SysUserRole">
+        update
+        sys_user_role set
+        user_id=#{userId,jdbcType=VARCHAR}, role_id=#{roleId,jdbcType=VARCHAR},
+        create_time
+        = now()
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+
+    <!--公共保存方法 -->
+    <insert id="save" parameterType="com.platform.entity.SysUserRole">
+        insert into sys_user_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="roleId != null">role_id,</if>
+            createtime
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null ">#{id,jdbcType=VARCHAR},</if>
+            <if test="userId != null ">#{userId,jdbcType=VARCHAR},</if>
+            <if test="roleId != null ">#{roleId,jdbcType=VARCHAR},</if>
+            now()
+        </trim>
+    </insert>
+
+
+    <!--公共根据主键删除数据 -->
+    <delete id="removeById" parameterType="java.lang.String">delete from sys_user_role where id =
+        #{id,jdbcType=VARCHAR}
+    </delete>
+
+
+    <!--公共更新单条记录 -->
+    <update id="update" parameterType="com.platform.entity.SysUserRole">
+        update sys_user_role
+        <set>
+            <if test="userId != null ">#{userId,jdbcType=VARCHAR},</if>
+            <if test="roleId != null ">#{roleId,jdbcType=VARCHAR},</if>
+            now()
+        </set>
+        where id= #{id,jdbcType=VARCHAR}
+    </update>
+    <!--公共方法结束 自定义方法开始 -->
+
+
+</mapper>

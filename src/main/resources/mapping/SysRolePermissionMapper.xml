@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.dao.SysRolePermissionDAO">
+    <resultMap id="BaseResultMap" type="com.platform.entity.SysRolePermission">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="role_id" property="roleId" jdbcType="VARCHAR"/>
+        <result column="permission_id" property="permissionId" jdbcType="VARCHAR"
+        />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <!--基础列 -->
+    <sql id="Base_Column_List">
+        id,
+        role_id,
+        permission_id,
+        create_time
+    </sql>
+
+    <!--公共按主键进行查询 -->
+    <select id="selectById" resultMap="BaseResultMap"
+            parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_role_permission where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+
+    <!--公共列表方法 -->
+    <select id="list" resultMap="BaseResultMap"
+            parameterType="com.platform.entity.SysRolePermission">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_role_permission
+        <where>
+            <if test="id!=null">id=#{id,jdbcType=VARCHAR}</if>
+            <if test="roleId!=null">and role_id=#{roleId,jdbcType=VARCHAR}</if>
+            <if test="permissionId!=null">and permission_id=#{permissionId,jdbcType=VARCHAR}</if>
+            <if test="createTime !=null ">and create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+        </where>
+    </select>
+
+
+    <delete id="delete" parameterType="com.platform.entity.SysRolePermission">
+        delete from sys_role_permission
+        <where>
+            <if test="id!=null">id=#{id,jdbcType=VARCHAR}</if>
+            <if test="roleId!=null">and role_id=#{roleId,jdbcType=VARCHAR}</if>
+            <if test="permissionId!=null">and permission_id=#{permissionId,jdbcType=VARCHAR}</if>
+            <if test="createTime !=null ">and create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+        </where>
+    </delete>
+
+    <!--公共get方法 -->
+    <select id="get" resultMap="BaseResultMap"
+            parameterType="com.platform.entity.SysRolePermission">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_role_permission
+        <where>
+            <if test="id!=null">id=#{id,jdbcType=VARCHAR}</if>
+            <if test="roleId!=null">and role_id=#{roleId,jdbcType=VARCHAR}</if>
+            <if test="permissionId!=null">and permission_id=#{permissionId,jdbcType=VARCHAR}</if>
+            <if test="createTime !=null ">and create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+        </where>
+    </select>
+
+
+    <!--公共按主键更新数据 -->
+    <update id="updateById" parameterType="com.platform.entity.SysRolePermission">
+        update
+        sys_role_permission set
+        role_id=#{roleId,jdbcType=VARCHAR}, permission_id=#{permissionId,jdbcType=VARCHAR},
+        createtime = now()
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+
+    <!--公共保存方法 -->
+    <insert id="save" parameterType="com.platform.entity.SysRolePermission">
+        insert into sys_role_permission
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="roleId != null">role_id,</if>
+            <if test="permissionId != null">permission_id,</if>
+            createtime
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null ">#{id,jdbcType=VARCHAR},</if>
+            <if test="roleId != null ">#{roleId,jdbcType=VARCHAR},</if>
+            <if test="permissionId != null ">#{permissionId,jdbcType=VARCHAR},</if>
+            now()
+        </trim>
+    </insert>
+
+
+    <!--公共根据主键删除数据 -->
+    <delete id="removeById" parameterType="java.lang.String">
+        delete from sys_role_permission where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+
+    <!--公共更新单条记录 -->
+    <update id="update" parameterType="com.platform.entity.SysRolePermission">
+        update sys_role_permission
+        <set>
+            <if test="roleId != null">role_id=#{roleId,jdbcType=VARCHAR},</if>
+            <if test="permissionId != null ">permission_id=#{permissionId,jdbcType=VARCHAR},</if>
+            createtime=now()
+        </set>
+        where id= #{id,jdbcType=VARCHAR}
+    </update>
+    <!--公共方法结束 自定义方法开始 -->
+
+
+</mapper>

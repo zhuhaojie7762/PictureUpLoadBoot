@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.dao.PicturesDAO">
+	<resultMap id="BaseResultMap"
+		 type="com.platform.entity.Pictures">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="pid" property="pid" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="url" property="url" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<!--基础列 -->
+	<sql id="Base_Column_List">
+		id, pid, title, name, url, create_time, remark
+	</sql>
+
+	<!--公共按主键进行查询 -->
+	<select id="selectById" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from pictures where id = #{id,jdbcType=VARCHAR}
+	</select>
+
+
+
+	<!--公共列表方法 -->
+	<select id="list" resultMap="BaseResultMap"
+		parameterType="com.platform.entity.Pictures">
+		select
+		<include refid="Base_Column_List" />
+		from pictures
+		<where>
+			<if test="id!=null">id=#{id,jdbcType=VARCHAR}</if>
+			<if test="pid!=null">and pid=#{pid,jdbcType=VARCHAR}</if>
+			<if test="title!=null">and title=#{title,jdbcType=VARCHAR}</if>
+			<if test="name!=null ">and name=#{name,jdbcType=VARCHAR}</if>
+			<if test="url !=null ">and url=#{url,jdbcType=VARCHAR}</if>
+			<if test="createTime !=null ">and create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+			<if test="remark !=null ">and remark=#{remark,jdbcType=VARCHAR}</if>
+		</where>
+	</select>
+
+
+	<delete id="delete" parameterType="com.platform.entity.Pictures">
+		delete from pictures
+		<where>
+			<if test="id!=null">id=#{id,jdbcType=VARCHAR}</if>
+			<if test="pid!=null">and pid=#{pid,jdbcType=VARCHAR}</if>
+			<if test="title!=null">and title=#{title,jdbcType=VARCHAR}</if>
+			<if test="name!=null ">and name=#{name,jdbcType=VARCHAR}</if>
+			<if test="url!=null ">and url=#{url,jdbcType=VARCHAR}</if>
+			<if test="createTime !=null ">and create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+			<if test="remark !=null ">and remark=#{remark,jdbcType=VARCHAR}</if>
+		</where>
+	</delete>
+
+	<!--公共get方法 -->
+	<select id="get" resultMap="BaseResultMap"
+		parameterType="com.platform.entity.Pictures">
+		select
+		<include refid="Base_Column_List" />
+		from pictures
+		<where>
+			<if test="id!=null">id=#{id,jdbcType=VARCHAR}</if>
+			<if test="pid!=null">and pid=#{pid,jdbcType=VARCHAR}</if>
+			<if test="title!=null">and title=#{title,jdbcType=VARCHAR}</if>
+			<if test="name!=null ">and name=#{name,jdbcType=VARCHAR}</if>
+			<if test="url !=null ">and url=#{url,jdbcType=VARCHAR}</if>
+			<if test="createTime !=null ">and create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+			<if test="remark !=null ">and remark=#{remark,jdbcType=VARCHAR}</if>
+		</where>
+	</select>
+
+
+	<!--公共按主键更新数据 -->
+	<update id="updateById" parameterType="com.platform.entity.Pictures">
+		update
+pictures set
+pid=#{pid,jdbcType=VARCHAR}, title=#{title,jdbcType=VARCHAR},
+name=#{name,jdbcType=VARCHAR},
+url=#{url,jdbcType=VARCHAR},
+remark=#{remark,jdbcType=VARCHAR},
+create_time
+			= now()
+where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+
+
+
+
+
+
+
+
+
+
+	<!--公共保存方法 -->
+	<insert id="save" parameterType="com.platform.entity.Pictures">
+		insert into pictures
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>
+			<if test="pid != null">pid,</if>
+			<if test="title != null">title,</if>
+			<if test="name != null">name,</if>
+			<if test="url != null ">url,</if>
+			create_time,
+			<if test="remark != null ">remark</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null ">#{id,jdbcType=VARCHAR},</if>
+			<if test="pid != null ">#{pid,jdbcType=VARCHAR},</if>
+			<if test="title != null ">#{title,jdbcType=VARCHAR},</if>
+			<if test="name != null ">#{name,jdbcType=VARCHAR},</if>
+			<if test="url != null ">#{url,jdbcType=VARCHAR},</if>
+			now(),
+			<if test="remark != null ">#{remark,jdbcType=VARCHAR}</if>
+		</trim>
+	</insert>
+
+
+
+	<!--公共根据主键删除数据 -->
+	<delete id="removeById" parameterType="java.lang.String">delete from pictures where id = #{id,jdbcType=VARCHAR}</delete>
+
+
+
+	<!--公共更新单条记录 -->
+	<update id="update" parameterType="com.platform.entity.Pictures">
+		update pictures
+		<set>
+			<if test="pid != null">pid=#{pid,jdbcType=VARCHAR},</if>
+			<if test="title != null ">title=#{title,jdbcType=VARCHAR},</if>
+			<if test="name != null ">name=#{name,jdbcType=VARCHAR},</if>
+			<if test="url != null">url=#{url,jdbcType=VARCHAR},</if>
+			create_time=now(),
+			<if test="remark != null">remark=#{remark,jdbcType=VARCHAR}</if>
+		</set>
+		where id= #{id,jdbcType=VARCHAR}
+	</update>
+	<!--公共方法结束 自定义方法开始 -->
+
+
+
+
+
+</mapper>

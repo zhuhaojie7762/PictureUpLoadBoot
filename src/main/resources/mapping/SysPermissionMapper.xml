@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.dao.SysPermissionDAO">
+	<resultMap id="BaseResultMap" type="com.platform.entity.SysPermission">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="visiable" property="visiable" jdbcType="INTEGER" />
+		<result column="menu_id" property="menuId" jdbcType="VARCHAR" />
+		<result column="edit" property="edit" jdbcType="INTEGER" />
+		<result column="added" property="added" jdbcType="INTEGER" />
+		<result column="del" property="del" jdbcType="INTEGER" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<!--基础列 -->
+	<sql id="Base_Column_List">
+		id, visiable, menu_id, edit, added, del, description, create_time
+	</sql>
+
+	<!--公共按主键进行查询 -->
+	<select id="selectById" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from sys_permission where id = #{id,jdbcType=VARCHAR}
+	</select>
+
+
+
+	<!--公共列表方法 -->
+	<select id="list" resultMap="BaseResultMap"
+		parameterType="com.platform.entity.SysPermission">
+		select
+		<include refid="Base_Column_List" />
+		from sys_permission
+		<where>
+			<if test="id!=null">id=#{id,jdbcType=VARCHAR}</if>
+			<if test="visiable!=null">and visiable=#{visiable,jdbcType=INTEGER}</if>
+			<if test="menuId!=null">and menu_id=#{menuId,jdbcType=VARCHAR}</if>
+			<if test="edit!=null ">and edit=#{edit,jdbcType=INTEGER}</if>
+			<if test="added !=null ">and added=#{added,jdbcType=INTEGER}</if>
+			<if test="del !=null ">and del=#{del,jdbcType=INTEGER}</if>
+			<if test="description !=null ">and description=#{description,jdbcType=VARCHAR}</if>
+			<if test="createTime !=null ">and createtime=#{createTime,jdbcType=TIMESTAMP}</if>
+		</where>
+	</select>
+
+
+	<delete id="delete" parameterType="com.platform.entity.SysPermission">
+		delete from sys_permission
+		<where>
+			<if test="id!=null">id=#{id,jdbcType=VARCHAR}</if>
+			<if test="visiable!=null">and visiable=#{visiable,jdbcType=INTEGER}</if>
+			<if test="menuId!=null">and menu_id=#{menuId,jdbcType=VARCHAR}</if>
+			<if test="edit!=null ">and edit=#{edit,jdbcType=INTEGER}</if>
+			<if test="added !=null ">and added=#{added,jdbcType=INTEGER}</if>
+			<if test="del !=null ">and del=#{del,jdbcType=INTEGER}</if>
+			<if test="description !=null ">and description=#{description,jdbcType=VARCHAR}</if>
+			<if test="createTime !=null ">and createtime=#{createTime,jdbcType=TIMESTAMP}</if>
+		</where>
+	</delete>
+
+	<!--公共get方法 -->
+	<select id="get" resultMap="BaseResultMap"
+		parameterType="com.platform.entity.SysPermission">
+		select
+		<include refid="Base_Column_List" />
+		from sys_permission
+		<where>
+			<if test="id!=null">id=#{id,jdbcType=VARCHAR}</if>
+			<if test="visiable!=null">and visiable=#{visiable,jdbcType=INTEGER}</if>
+			<if test="menuId!=null">and menu_id=#{menuId,jdbcType=VARCHAR}</if>
+			<if test="edit!=null ">and edit=#{edit,jdbcType=INTEGER}</if>
+			<if test="added !=null ">and added=#{added,jdbcType=INTEGER}</if>
+			<if test="del !=null ">and del=#{del,jdbcType=INTEGER}</if>
+			<if test="description !=null ">and description=#{description,jdbcType=VARCHAR}</if>
+			<if test="createTime !=null ">and createtime=#{createTime,jdbcType=TIMESTAMP}</if>
+		</where>
+	</select>
+
+
+	<!--公共按主键更新数据 -->
+	<update id="updateById" parameterType="com.platform.entity.SysPermission">
+		update
+sys_permission set
+visiable=#{visiable,jdbcType=INTEGER}, menu_id=#{menuId,jdbcType=VARCHAR},
+edit=#{edit,jdbcType=INTEGER},
+			added=#{added,jdbcType=INTEGER}, del=#{del,jdbcType=INTEGER},
+description=#{description,jdbcType=VARCHAR},
+create_time
+			= now()
+where
+id = #{id,jdbcType=VARCHAR}
+	</update>
+
+
+
+	<!--公共保存方法 -->
+	<insert id="save" parameterType="com.platform.entity.SysPermission">
+		insert INTEGERo sys_permission
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>
+			<if test="visiable != null">visiable,</if>
+			<if test="menuId != null">menu_id,</if>
+			<if test="edit != null">edit,</if>
+			<if test="added != null ">added,</if>
+			<if test="del != null ">del,</if>
+			create_time,
+			<if test="description != null ">description</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null ">#{id,jdbcType=VARCHAR},</if>
+			<if test="visiable != null">#{visiable,jdbcType=INTEGER},</if>
+			<if test="menuId != null">#{menu_id,jdbcType=VARCHAR},</if>
+			<if test="edit != null">#{edit,jdbcType=INTEGER},</if>
+			<if test="added != null ">#{added,jdbcType=INTEGER},</if>
+			<if test="del != null ">#{del,jdbcType=INTEGER},</if>
+			now(),
+			<if test="description != null ">#{description,jdbcType=VARCHAR}</if>
+		</trim>
+	</insert>
+
+
+
+	<!--公共根据主键删除数据 -->
+	<delete id="removeById" parameterType="java.lang.String">delete from sys_permission where id = #{id,jdbcType=VARCHAR}</delete>
+
+
+
+	<!--公共更新单条记录 -->
+	<update id="update" parameterType="com.platform.entity.SysPermission">
+		update sys_permission
+		<set>
+			<if test="visiable != null">#{visiable,jdbcType=INTEGER},</if>
+			<if test="menuId != null">#{menu_id,jdbcType=VARCHAR},</if>
+			<if test="edit != null">#{edit,jdbcType=INTEGER},</if>
+			<if test="added != null ">#{added,jdbcType=INTEGER},</if>
+			<if test="del != null ">#{del,jdbcType=INTEGER},</if>
+			now(),
+			<if test="description != null ">#{description,jdbcType=VARCHAR}</if>
+		</set>
+		where id= #{id,jdbcType=VARCHAR}
+	</update>
+	<!--公共方法结束 自定义方法开始 -->
+
+
+
+
+
+</mapper>
