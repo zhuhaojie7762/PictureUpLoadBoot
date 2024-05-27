@@ -20,7 +20,10 @@ spring:
       idle-timeout: 600000
       max-lifetime: 1800000
       pool-name: MyHikariCP
-
+  mvc:
+    static-path-pattern: /static/**
+  resources:
+    static-locations: classpath:/static
 
 #mybatis-plus:
 #  type-aliases-package: com.platform.entity
