@@ -29,7 +29,7 @@ spring:
 #  type-aliases-package: com.platform.entity
 
 mybatis:
-  mapper-locations: classpath*:resources/mapping/*.xml
+  mapper-locations: classpath*:mapping/*.xml
 
 pagehelper:
   helperDialect: mysql

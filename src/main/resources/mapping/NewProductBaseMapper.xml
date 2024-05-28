@@ -7,8 +7,7 @@
         <result column="fd_item_no" property="itemNo" jdbcType="VARCHAR"/>
         <result column="fd_main_code" property="mainCode" jdbcType="VARCHAR"/>
         <result column="fd_other" property="other" jdbcType="VARCHAR"/>
-        <result column="fd_putaway_type" property="putawayType"
-                jdbcType="VARCHAR"/>
+        <result column="fd_putaway_type" property="putawayType" jdbcType="VARCHAR"/>
         <result column="fd_picture" property="picture" jdbcType="VARCHAR"/>
         <result column="fd_classify" property="classify" jdbcType="VARCHAR"/>
         <result column="fd_color" property="color" jdbcType="VARCHAR"/>
@@ -18,12 +17,9 @@
         <result column="fd_size" property="size" jdbcType="VARCHAR"/>
         <result column="fd_barcode_one" property="barcodeOne" jdbcType="VARCHAR"/>
         <result column="fd_barcode_two" property="barcodeTwo" jdbcType="VARCHAR"/>
-        <result column="fd_barcode_three" property="barcodeThree"
-                jdbcType="VARCHAR"/>
-        <result column="fd_barcode_four" property="barcodeFour"
-                jdbcType="VARCHAR"/>
-        <result column="fd_barcode_five" property="barcodeFive"
-                jdbcType="VARCHAR"/>
+        <result column="fd_barcode_three" property="barcodeThree" jdbcType="VARCHAR"/>
+        <result column="fd_barcode_four" property="barcodeFour" jdbcType="VARCHAR"/>
+        <result column="fd_barcode_five" property="barcodeFive" jdbcType="VARCHAR"/>
         <result column="fd_link" property="link" jdbcType="VARCHAR"/>
         <result column="fd_remark" property="remark" jdbcType="VARCHAR"/>
         <result column="fd_same_link" property="sameLink" jdbcType="VARCHAR"/>

@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.*;
+
 @WebServlet(name = "up", urlPatterns = {"/toUp"})
 public class FileUpLoad extends HttpServlet {
     /**
@@ -51,12 +52,7 @@ public class FileUpLoad extends HttpServlet {
         ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
         PrintWriter out = response.getWriter();
         try {
-            List itemList = upload.parseRequest(request);
-            String yearMonth = DateUtils.dateToStr(new Date());
-            String[] yearMonthArray = yearMonth.split("-");
-            StringBuilder yearMonthName = new StringBuilder();
-            yearMonthName.append(yearMonthArray[0]).append(yearMonthArray[1]);
-
+            List<FileItem> itemList = upload.parseRequest(request);
             if (itemList != null && itemList.size() > 0) {
                 StringBuilder basePath = new StringBuilder();
                 String path = request.getContextPath();
@@ -66,10 +62,10 @@ public class FileUpLoad extends HttpServlet {
 
                 basePath.append(request.getScheme()).append("://").append(request.getServerName()).append(":")
                         .append(request.getServerPort()).append(path).append("/upload/");
-                Iterator it = itemList.iterator();
+                Iterator<FileItem> it = itemList.iterator();
                 List<String> pics = new ArrayList<>();
                 while (it.hasNext()) {
-                    FileItem item = (FileItem) it.next();
+                    FileItem item = it.next();
                     if (item != null) {
                         if (!item.isFormField()) {
                             String name = item.getName();
@@ -92,7 +88,7 @@ public class FileUpLoad extends HttpServlet {
                     }
                 }
                 it = itemList.iterator();
-                Map<String, String> itemNoPicture = new HashMap<>();
+                Map<String, String> itemNoPicture = new HashMap<>(itemList.size());
                 while (it.hasNext()) {
 
                     FileItem item = (FileItem) it.next();
@@ -107,7 +103,7 @@ public class FileUpLoad extends HttpServlet {
                         } else {
                             String name = item.getName();
                             System.out.println("File: " + name);
-                            if (name != null && !name.trim().equals("")) {
+                            if (name != null && !"".equals(name.trim())) {
                                 name = name.trim();
                                 String name1 = "";
                                 int indexOne = name.lastIndexOf(".");
@@ -120,10 +116,10 @@ public class FileUpLoad extends HttpServlet {
 
                                 String fileName = name;
                                 int index = fileName.lastIndexOf("\\");
-                                if (index != -1 && index != fileName.length()) {
+                                if (index != -1) {
                                     fileName = fileName.substring(index);
                                 }
-                                String dataDirOne = dataDir + mulu.toString() + "/" + fileName;
+                                String dataDirOne = dataDir + mulu + "/" + fileName;
                                 File saved = new File(dataDirOne);
                                 boolean f = saved.getParentFile().exists();
                                 boolean k = saved.isDirectory();
@@ -223,6 +219,4 @@ public class FileUpLoad extends HttpServlet {
             e.printStackTrace();
         }
     }
-
-
 }

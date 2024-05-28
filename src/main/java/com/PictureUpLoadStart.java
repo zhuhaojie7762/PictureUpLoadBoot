@@ -12,7 +12,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 //@EnableAutoConfiguration
 //@ImportResource(value={"classpath:spring/common-dal.xml"})
 @ServletComponentScan("com.platform.servlet")
-@MapperScan(value = "com.platform.dao") //A component required a bean named 'orderOriginDAO' that could not be found
+@MapperScan(value = "com.platform.dao")
 public class PictureUpLoadStart {
 
     public static void main(String[] args) {
