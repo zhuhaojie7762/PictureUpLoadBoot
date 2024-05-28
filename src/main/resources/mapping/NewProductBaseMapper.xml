@@ -328,7 +328,7 @@
         )
         values
         <trim suffixOverrides=",">
-            <foreach collection="NewProductBaseList" separator=","
+            <foreach collection="newProductBaseList" separator=","
                      item="newProductBase">
                 (
                 #{newProductBase.userId},
@@ -342,7 +342,7 @@
                 #{newProductBase.shop},
                 #{newProductBase.model},
                 #{newProductBase.sellPrice},
-                #{newProductBase.size},
+                #{newProductBase.productSize},
                 #{newProductBase.barcodeOne},
                 #{newProductBase.barcodeTwo},
                 #{newProductBase.barcodeThree},

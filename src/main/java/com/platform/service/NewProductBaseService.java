@@ -19,7 +19,7 @@ public interface NewProductBaseService  {
      * tpTid
      * @param list
      */
-    void saveOrUpdateBatch(@Param(value = "OpenOrderList") List<NewProductBase> list);
+    void saveOrUpdateBatch(@Param(value = "newProductBaseList") List<NewProductBase> list);
 
     void updateBatch(@Param(value = "newProductBaseList") List<NewProductBase> list);
 

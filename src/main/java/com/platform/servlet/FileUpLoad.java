@@ -38,6 +38,7 @@ public class FileUpLoad extends HttpServlet {
     private NewProductBaseService newProductBaseService;
 
     private String dataDir;
+    private String sourceDataDir;
 
 
     @Override
@@ -61,7 +62,7 @@ public class FileUpLoad extends HttpServlet {
                 String path = request.getContextPath();
 
                 pubUrl.append(request.getScheme()).append("://").append(request.getServerName()).append(":")
-                        .append("9905/demp/anyrt/file/");
+                        .append("8080/static/images");
 
                 basePath.append(request.getScheme()).append("://").append(request.getServerName()).append(":")
                         .append(request.getServerPort()).append(path).append("/upload/");
@@ -122,44 +123,14 @@ public class FileUpLoad extends HttpServlet {
                                 if (index != -1) {
                                     fileName = fileName.substring(index);
                                 }
-                                String dataDirOne = dataDir + File.separator+ mulu + File.separator+ fileName;
-                                File saved = new File(dataDirOne);
-                                boolean f = saved.getParentFile().exists();
-                                boolean k = saved.isDirectory();
-                                if (!f && !k) {
-                                    File fileP = saved.getParentFile();
-                                    boolean t = fileP.mkdirs();
-                                    if (!t) {
-                                        throw new Exception("创建父路径：" + fileP.getName() + "失败");
-                                    }
-
-                                }
-                                if (saved.exists()) {
-                                    boolean t = saved.delete();
-                                    if (t) {
-                                        boolean m = saved.createNewFile();
-                                        if (!m) {
-                                            throw new Exception("创建新文件失败");
-                                        }
-                                    } else {
-                                        throw new Exception("删除原始有的文件失败");
-                                    }
-                                }
-                                InputStream ins = item.getInputStream();
-                                OutputStream ous = new FileOutputStream(saved);
-                                byte[] tmp = new byte[1024];
-                                int len;
-                                while ((len = ins.read(tmp)) != -1) {
-                                    ous.write(tmp, 0, len);
-                                }
-
-                                System.out.println("url:" + dataDir + mulu + "/" + fileName);
-                                String url2 = pubUrl + mulu.toString() + "/" + fileName;
+                                upLoadFileToPath(dataDir, item, mulu, fileName);
+                                System.out.println("dataDir:" + dataDir);
+                                //upLoadFileToPath(sourceDataDir,item,mulu,fileName);
+                                String url = dataDir + File.separator + mulu + File.separator + fileName;
+                                System.out.println("url:" + url);
+                                String url2 = pubUrl + File.separator + mulu + File.separator + fileName;
                                 System.out.println("url2:" + url2);
-                                ins.close();
-                                ous.flush();
-                                ous.close();
-                                itemNoPicture.put(name1, "anyrt/file/" + mulu + "/" + fileName);
+                                itemNoPicture.put(name1, url2);
                                 pics.add(url2);
                             }
                         }
@@ -170,18 +141,32 @@ public class FileUpLoad extends HttpServlet {
                  * 开始更新数据库
                  */
                 if (itemNoPicture.size() > 0) {
-                    List<NewProductBase> list = newProductBaseService.listByItemNo(hasData);
-                    if (list != null && list.size() > 0) {
-                        for (NewProductBase newProductBase : list) {
-                            String itemNo = newProductBase.getItemNo();
-                            String url = itemNoPicture.get(itemNo);
-                            newProductBase.setPicture(url);
+                    if (hasData.size() > 0) {
+                        List<NewProductBase> list = newProductBaseService.listByItemNo(hasData);
+                        if (list != null && list.size() > 0) {
+                            for (NewProductBase newProductBase : list) {
+                                String itemNo = newProductBase.getItemNo();
+                                String url = itemNoPicture.get(itemNo);
+                                newProductBase.setPicture(url);
+                            }
                         }
+                        newProductBaseService.updateBatch(list);
                     }
-                    newProductBaseService.updateBatch(list);
+                    if (noData.size() > 0) {
+                        List<NewProductBase> list = new ArrayList<>(noData.size());
+                        for (String noDatum : noData) {
+                            NewProductBase newProductBase = new NewProductBase();
+                            //newProductBase.setPicture(noDatum);
+                            newProductBase.setItemNo(noDatum);
+                            newProductBase.setPicture(itemNoPicture.get(noDatum));
+                            newProductBase.setCreater("SYSTEM");
+                            list.add(newProductBase);
+                        }
+                        newProductBaseService.saveOrUpdateBatch(list);
+                    }
+
                 }
-                String stringBuffer = "上传完成的图片地址:" + pics + ",在上新表中不存在的货号为:" +
-                        noData + "的记录,请将对应得货号的数据导入数据库后再次上传对应的图片";
+                String stringBuffer = "上传完成的图片地址:" + pics;
                 out.write(stringBuffer);
             }
         } catch (Exception e) {
@@ -189,6 +174,49 @@ public class FileUpLoad extends HttpServlet {
             out.println("上传发生错误：" + e.getMessage());
         }
     }
+
+
+    public void upLoadFileToPath(String path, FileItem item, StringBuilder mulu, String fileName) throws Exception {
+        String dataDirOne = path + File.separator + mulu + File.separator + fileName;
+        File saved = new File(dataDirOne);
+        boolean f = saved.getParentFile().exists();
+        boolean k = saved.isDirectory();
+        if (!f && !k) {
+            File fileP = saved.getParentFile();
+            boolean t = fileP.mkdirs();
+            if (!t) {
+                throw new Exception("创建父路径：" + fileP.getName() + "失败");
+            }
+
+        }
+        if (saved.exists()) {
+            boolean t = saved.delete();
+            if (t) {
+                boolean m = saved.createNewFile();
+                if (!m) {
+                    throw new Exception("创建新文件失败");
+                }
+            } else {
+                throw new Exception("删除原始有的文件失败");
+            }
+        }
+        InputStream ins = item.getInputStream();
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(ins);
+        OutputStream ous = new FileOutputStream(saved);
+        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(ous);
+        byte[] tmp = new byte[1024];
+        int len;
+        while ((len = bufferedInputStream.read(tmp)) != -1) {
+            //ous.write(tmp, 0, len);
+            bufferedOutputStream.write(tmp, 0, len);
+        }
+        bufferedInputStream.close();
+        bufferedOutputStream.flush();
+        bufferedOutputStream.close();
+//        ous.flush();
+//        ous.close();
+    }
+
 
     public String deal(String name) {
 
@@ -223,6 +251,8 @@ public class FileUpLoad extends HttpServlet {
             URL resource = classLoader.getResource("static/images");
             dataDir = resource.getPath();
             dataDir = URLDecoder.decode(dataDir, "UTF-8");
+            System.out.println("dataDir:" + dataDir);
+
             /**
              * request.getServletContext().getRealPath("")
              * request.getServletContext().getRealPath("/")
