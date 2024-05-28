@@ -125,7 +125,11 @@ public class FileUpLoad extends HttpServlet {
                                 }
                                 upLoadFileToPath(dataDir, item, mulu, fileName);
                                 System.out.println("dataDir:" + dataDir);
-                                //upLoadFileToPath(sourceDataDir,item,mulu,fileName);
+                                int number = dataDir.indexOf("target");
+                                sourceDataDir = dataDir.substring(0, number) + "src/main/resources/static/images";
+                                //sourceDataDir = dataDir.substring()
+                                System.out.println("sourceDataDir:" + sourceDataDir);
+                                upLoadFileToPath(sourceDataDir, item, mulu, fileName);
                                 String url = dataDir + File.separator + mulu + File.separator + fileName;
                                 System.out.println("url:" + url);
                                 String url2 = pubUrl + File.separator + mulu + File.separator + fileName;
@@ -219,7 +223,6 @@ public class FileUpLoad extends HttpServlet {
 
 
     public String deal(String name) {
-
         if (name != null) {
             name = name.trim();
             if (!"".equals(name)) {
@@ -268,5 +271,12 @@ public class FileUpLoad extends HttpServlet {
             logger.error("servlet获取spring中的bean异常---------" + e);
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        String s = "/Users/zhuhaojie/java资料/projects/PictureUpLoadBoot/target/classes/static/images";
+        int number = s.indexOf("target");
+        String s1 = s.substring(0, number) + "src/main/resources/static/images";
+        System.out.println(s1);
     }
 }
