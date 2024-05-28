@@ -6,10 +6,10 @@ server:
       charset: UTF-8
       enabled: true
       force: true
-
+# jdbc:mysql://localhost:3306/db?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai  mysql 5连接
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/plaform?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/plaform?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
     username: root
     password: haojie88
     driver-class-name: com.mysql.cj.jdbc.Driver
