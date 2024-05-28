@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
@@ -92,7 +94,7 @@ public class FileUpLoad extends HttpServlet {
                 Map<String, String> itemNoPicture = new HashMap<>(itemList.size());
                 while (it.hasNext()) {
 
-                    FileItem item = (FileItem) it.next();
+                    FileItem item = it.next();
                     if (item != null) {
                         if (item.isFormField()) {
                             String name = item.getFieldName();
@@ -110,7 +112,7 @@ public class FileUpLoad extends HttpServlet {
                                 int indexOne = name.lastIndexOf(".");
                                 if (indexOne != -1) {
                                     name1 = name.substring(0, indexOne);
-                                    if (!map.containsKey(name1)) {
+                                    if (map.containsKey(name1)) {
                                         continue;
                                     }
                                 }
@@ -120,7 +122,7 @@ public class FileUpLoad extends HttpServlet {
                                 if (index != -1) {
                                     fileName = fileName.substring(index);
                                 }
-                                String dataDirOne = dataDir + mulu + "/" + fileName;
+                                String dataDirOne = dataDir + File.separator+ mulu + File.separator+ fileName;
                                 File saved = new File(dataDirOne);
                                 boolean f = saved.getParentFile().exists();
                                 boolean k = saved.isDirectory();
@@ -211,8 +213,25 @@ public class FileUpLoad extends HttpServlet {
         try {
             ServletContext servletContext = this.getServletContext();
             WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(servletContext);
+            assert ctx != null;
             newProductBaseService = (NewProductBaseService) ctx.getBean("newProductBaseService");
-            dataDir = this.getInitParameter("dataDir");
+            //相对路径
+            //dataDir = servletContext.getContextPath()+File.separator+"static"+File.separator+"images";
+            //绝对路径
+            //dataDir = servletContext.getRealPath("/")+"static"+File.separator+"images";
+            ClassLoader classLoader = FileUpLoad.class.getClassLoader();
+            URL resource = classLoader.getResource("static/images");
+            dataDir = resource.getPath();
+            dataDir = URLDecoder.decode(dataDir, "UTF-8");
+            /**
+             * request.getServletContext().getRealPath("")
+             * request.getServletContext().getRealPath("/")
+             * FileUpLoad.class.getResource("").getPath()
+             * FileUpLoad.class.getResource(“/”).getPath()
+             * FileUpLoad.class.getClassLoader().getResource("").getPath()
+             * FileUpLoad.getURL("classpath:").getPath()
+             *
+             */
             logger.info("dataDir:" + dataDir);
 
         } catch (Exception e) {
