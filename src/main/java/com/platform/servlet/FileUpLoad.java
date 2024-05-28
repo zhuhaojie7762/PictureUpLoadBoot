@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @WebServlet(name = "up", urlPatterns = {"/toUp"})
@@ -150,13 +151,13 @@ public class FileUpLoad extends HttpServlet {
                                     ous.write(tmp, 0, len);
                                 }
 
-                                System.out.println("url:" + dataDir + mulu.toString() + "/" + fileName);
+                                System.out.println("url:" + dataDir + mulu + "/" + fileName);
                                 String url2 = pubUrl + mulu.toString() + "/" + fileName;
                                 System.out.println("url2:" + url2);
                                 ins.close();
                                 ous.flush();
                                 ous.close();
-                                itemNoPicture.put(name1, "anyrt/file/" + mulu.toString() + "/" + fileName);
+                                itemNoPicture.put(name1, "anyrt/file/" + mulu + "/" + fileName);
                                 pics.add(url2);
                             }
                         }
@@ -193,7 +194,7 @@ public class FileUpLoad extends HttpServlet {
             name = name.trim();
             if (!"".equals(name)) {
                 try {
-                    name = new String(name.getBytes("iso8859-1"), "UTF-8");
+                    name = new String(name.getBytes("iso8859-1"), StandardCharsets.UTF_8);
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }

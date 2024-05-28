@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Getter
@@ -22,8 +23,8 @@ public class NewProductBase implements Serializable {
     private String color;
     private String shop;
     private String model;
-    private Double sellPrice;
-    private String size;
+    private BigDecimal sellPrice;
+    private String productSize;
     private String barcodeOne;
     private String barcodeTwo;
     private String barcodeThree;

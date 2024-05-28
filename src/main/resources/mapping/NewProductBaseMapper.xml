@@ -3,84 +3,84 @@
 <mapper namespace="com.platform.dao.NewProductBaseDAO">
     <resultMap id="BaseResultMap" type="com.platform.entity.NewProductBase">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="fp_userid_" property="userId" jdbcType="INTEGER"/>
-        <result column="fd_item_no" property="itemNo" jdbcType="VARCHAR"/>
-        <result column="fd_main_code" property="mainCode" jdbcType="VARCHAR"/>
-        <result column="fd_other" property="other" jdbcType="VARCHAR"/>
-        <result column="fd_putaway_type" property="putawayType" jdbcType="VARCHAR"/>
-        <result column="fd_picture" property="picture" jdbcType="VARCHAR"/>
-        <result column="fd_classify" property="classify" jdbcType="VARCHAR"/>
-        <result column="fd_color" property="color" jdbcType="VARCHAR"/>
-        <result column="fd_shop" property="shop" jdbcType="VARCHAR"/>
-        <result column="fd_model" property="model" jdbcType="VARCHAR"/>
-        <result column="fd_sell_price" property="sellPrice" jdbcType="DOUBLE"/>
-        <result column="fd_size" property="size" jdbcType="VARCHAR"/>
-        <result column="fd_barcode_one" property="barcodeOne" jdbcType="VARCHAR"/>
-        <result column="fd_barcode_two" property="barcodeTwo" jdbcType="VARCHAR"/>
-        <result column="fd_barcode_three" property="barcodeThree" jdbcType="VARCHAR"/>
-        <result column="fd_barcode_four" property="barcodeFour" jdbcType="VARCHAR"/>
-        <result column="fd_barcode_five" property="barcodeFive" jdbcType="VARCHAR"/>
-        <result column="fd_link" property="link" jdbcType="VARCHAR"/>
-        <result column="fd_remark" property="remark" jdbcType="VARCHAR"/>
-        <result column="fd_same_link" property="sameLink" jdbcType="VARCHAR"/>
-        <result column="fd_creater" property="creater" jdbcType="VARCHAR"/>
-        <result column="fd_updater" property="updater" jdbcType="VARCHAR"/>
-        <result column="fd_create_time" property="createTime" jdbcType="TIMESTAMP"/>
-        <result column="fd_update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="item_no" property="itemNo" jdbcType="VARCHAR"/>
+        <result column="main_code" property="mainCode" jdbcType="VARCHAR"/>
+        <result column="other" property="other" jdbcType="VARCHAR"/>
+        <result column="putaway_type" property="putawayType" jdbcType="VARCHAR"/>
+        <result column="picture" property="picture" jdbcType="VARCHAR"/>
+        <result column="classify" property="classify" jdbcType="VARCHAR"/>
+        <result column="color" property="color" jdbcType="VARCHAR"/>
+        <result column="shop" property="shop" jdbcType="VARCHAR"/>
+        <result column="model" property="model" jdbcType="VARCHAR"/>
+        <result column="sell_price" property="sellPrice" jdbcType="DECIMAL"/>
+        <result column="product_size" property="productSize" jdbcType="VARCHAR"/>
+        <result column="barcode_one" property="barcodeOne" jdbcType="VARCHAR"/>
+        <result column="barcode_two" property="barcodeTwo" jdbcType="VARCHAR"/>
+        <result column="barcode_three" property="barcodeThree" jdbcType="VARCHAR"/>
+        <result column="barcode_four" property="barcodeFour" jdbcType="VARCHAR"/>
+        <result column="barcode_five" property="barcodeFive" jdbcType="VARCHAR"/>
+        <result column="link" property="link" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="same_link" property="sameLink" jdbcType="VARCHAR"/>
+        <result column="creater" property="creater" jdbcType="VARCHAR"/>
+        <result column="updater" property="updater" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <!--基础列 -->
     <sql id="Base_Column_List">
 		id,
-		fp_userid_,
-		fd_item_no,
-		fd_main_code ,
-		fd_other ,
-		fd_putaway_type ,
-		fd_picture ,
-		fd_classify ,
-		fd_color ,
-		fd_shop ,
-		fd_model ,
-		fd_sell_price ,
-		fd_size ,
-		fd_barcode_one ,
-		fd_barcode_two ,
-		fd_barcode_three ,
-		fd_barcode_four ,
-		fd_barcode_five ,
-		fd_link ,
-		fd_remark ,
-		fd_same_link ,
-		fd_creater ,
-		fd_updater ,
-		fd_update_time,
-		fd_create_time
+		user_id,
+		item_no,
+		main_code ,
+		other ,
+		putaway_type ,
+		picture ,
+		classify ,
+		color ,
+		shop ,
+		model ,
+		sell_price ,
+        product_size ,
+		barcode_one ,
+		barcode_two ,
+		barcode_three ,
+		barcode_four ,
+		barcode_five ,
+		link ,
+		remark ,
+		same_link ,
+		creater ,
+		updater ,
+		update_time,
+		create_time
 	</sql>
 
     <sql id="Base_Column_ListOne">
-		fp_userid_,
-		fd_item_no,
-		fd_main_code ,
-		fd_other ,
-		fd_putaway_type ,
-		fd_picture ,
-		fd_classify ,
-		fd_color ,
-		fd_shop ,
-		fd_model ,
-		fd_sell_price ,
-		fd_size ,
-		fd_barcode_one ,
-		fd_barcode_two ,
-		fd_barcode_three ,
-		fd_barcode_four ,
-		fd_barcode_five ,
-		fd_link ,
-		fd_remark ,
-		fd_same_link ,
-		fd_creater ,
-		fd_updater ,
-		fd_create_time
+		user_id,
+		item_no,
+		main_code ,
+		other ,
+		putaway_type ,
+		picture ,
+		classify ,
+		color ,
+		shop ,
+		model ,
+		sell_price ,
+        product_size ,
+		barcode_one ,
+		barcode_two ,
+		barcode_three ,
+		barcode_four ,
+		barcode_five ,
+		link ,
+		remark ,
+		same_link ,
+		creater ,
+		updater ,
+		create_time
 	</sql>
 
     <!--公共按主键进行查询 -->
@@ -98,31 +98,31 @@
         from new_product_base
         <where>
             <if test="id!=null">id=#{id,jdbcType=INTEGER}</if>
-            <if test="userId!=null">and fp_userid_=#{userId,jdbcType=INTEGER}</if>
-            <if test="itemNo!=null">and fd_item_no=#{itemNo,jdbcType=VARCHAR}</if>
-            <if test="mainCode!=null">and fd_main_code=#{mainCode,jdbcType=VARCHAR}</if>
-            <if test="other!=null">and fd_other=#{other,jdbcType=VARCHAR}</if>
-            <if test="putawayType!=null">and fd_putaway_type=#{putawayType,jdbcType=VARCHAR}</if>
-            <if test="picture!=null">and ft_picture=#{picture,jdbcType=VARCHAR}</if>
-            <if test="classify!=null">and ft_classify=#{classify,jdbcType=VARCHAR}</if>
-            <if test="color!=null">and fd_color=#{color,jdbcType=VARCHAR}</if>
-            <if test="shop!=null">and fd_shop=#{shop,jdbcType=VARCHAR}</if>
-            <if test="model!=null">and fd_model=#{model,jdbcType=VARCHAR}</if>
-            <if test="sellPrice!=null">and fd_sell_price=#{sellPrice,jdbcType=DOUBLE}</if>
-            <if test="size!=null">and fd_size=#{size,jdbcType=VARCHAR}</if>
-            <if test="barcodeOne!=null">and fd_barcode_one=#{barcodeOne,jdbcType=INTEGER}</if>
-            <if test="barcodeTwo!=null">and fd_barcode_two=#{barcodeTwo,jdbcType=VARCHAR}</if>
-            <if test="barcodeThree!=null">and fd_barcode_three=#{barcodeThree,jdbcType=VARCHAR}
+            <if test="userId!=null">and user_id=#{userId,jdbcType=INTEGER}</if>
+            <if test="itemNo!=null">and item_no=#{itemNo,jdbcType=VARCHAR}</if>
+            <if test="mainCode!=null">and main_code=#{mainCode,jdbcType=VARCHAR}</if>
+            <if test="other!=null">and other=#{other,jdbcType=VARCHAR}</if>
+            <if test="putawayType!=null">and putaway_type=#{putawayType,jdbcType=VARCHAR}</if>
+            <if test="picture!=null">and picture=#{picture,jdbcType=VARCHAR}</if>
+            <if test="classify!=null">and classify=#{classify,jdbcType=VARCHAR}</if>
+            <if test="color!=null">and color=#{color,jdbcType=VARCHAR}</if>
+            <if test="shop!=null">and shop=#{shop,jdbcType=VARCHAR}</if>
+            <if test="model!=null">and model=#{model,jdbcType=VARCHAR}</if>
+            <if test="sellPrice!=null">and sell_price=#{sellPrice,jdbcType=DECIMAL}</if>
+            <if test="size!=null">and size=#{product_size,jdbcType=VARCHAR}</if>
+            <if test="barcodeOne!=null">and barcode_one=#{barcodeOne,jdbcType=INTEGER}</if>
+            <if test="barcodeTwo!=null">and barcode_two=#{barcodeTwo,jdbcType=VARCHAR}</if>
+            <if test="barcodeThree!=null">and barcode_three=#{barcodeThree,jdbcType=VARCHAR}
             </if>
-            <if test="barcodeFour!=null">and fd_barcode_four=#{barcodeFour,jdbcType=VARCHAR}</if>
-            <if test="barcodeFive!=null">and fd_barcode_five=#{barcodeFive,jdbcType=VARCHAR}</if>
-            <if test="link!=null">and fd_link=#{link,jdbcType=VARCHAR}</if>
-            <if test="remark!=null">and fd_remark=#{remark,jdbcType=VARCHAR}</if>
-            <if test="sameLink!=null">and fd_same_link=#{sameLink,jdbcType=VARCHAR}</if>
-            <if test="creater!=null">and fd_creater=#{creater,jdbcType=VARCHAR}</if>
-            <if test="updater!=null">and fd_updater=#{updater,jdbcType=VARCHAR}</if>
-            <if test="createTime!=null ">and fd_create_time=#{createTime,jdbcType=TIMESTAMP}</if>
-            <if test="updateTime!=null ">and fd_update_time=#{updateTime,jdbcType=TIMESTAMP}</if>
+            <if test="barcodeFour!=null">and barcode_four=#{barcodeFour,jdbcType=VARCHAR}</if>
+            <if test="barcodeFive!=null">and barcode_five=#{barcodeFive,jdbcType=VARCHAR}</if>
+            <if test="link!=null">and link=#{link,jdbcType=VARCHAR}</if>
+            <if test="remark!=null">and remark=#{remark,jdbcType=VARCHAR}</if>
+            <if test="sameLink!=null">and same_link=#{sameLink,jdbcType=VARCHAR}</if>
+            <if test="creater!=null">and creater=#{creater,jdbcType=VARCHAR}</if>
+            <if test="updater!=null">and updater=#{updater,jdbcType=VARCHAR}</if>
+            <if test="createTime!=null ">and create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+            <if test="updateTime!=null ">and update_time=#{updateTime,jdbcType=TIMESTAMP}</if>
         </where>
     </select>
 
@@ -131,31 +131,31 @@
         delete from new_product_base
         <where>
             <if test="id!=null">id=#{id,jdbcType=INTEGER}</if>
-            <if test="userId!=null">and fp_userid_=#{userId,jdbcType=INTEGER}</if>
-            <if test="itemNo!=null">and fd_item_no=#{itemNo,jdbcType=VARCHAR}</if>
-            <if test="mainCode!=null">and fd_main_code=#{mainCode,jdbcType=VARCHAR}</if>
-            <if test="other!=null">and fd_other=#{other,jdbcType=VARCHAR}</if>
-            <if test="putawayType!=null">and fd_putaway_type=#{putawayType,jdbcType=VARCHAR}</if>
-            <if test="picture!=null">and ft_picture=#{picture,jdbcType=VARCHAR}</if>
-            <if test="classify!=null">and ft_classify=#{classify,jdbcType=VARCHAR}</if>
-            <if test="color!=null">and fd_color=#{color,jdbcType=VARCHAR}</if>
-            <if test="shop!=null">and fd_shop=#{shop,jdbcType=VARCHAR}</if>
-            <if test="model!=null">and fd_model=#{model,jdbcType=VARCHAR}</if>
-            <if test="sellPrice!=null">and fd_sell_price=#{sellPrice,jdbcType=DOUBLE}</if>
-            <if test="size!=null">and fd_size=#{size,jdbcType=VARCHAR}</if>
-            <if test="barcodeOne!=null">and fd_barcode_one=#{barcodeOne,jdbcType=INTEGER}</if>
-            <if test="barcodeTwo!=null">and fd_barcode_two=#{barcodeTwo,jdbcType=VARCHAR}</if>
-            <if test="barcodeThree!=null">and fd_barcode_three=#{barcodeThree,jdbcType=VARCHAR}
+            <if test="userId!=null">and user_id=#{userId,jdbcType=INTEGER}</if>
+            <if test="itemNo!=null">and item_no=#{itemNo,jdbcType=VARCHAR}</if>
+            <if test="mainCode!=null">and main_code=#{mainCode,jdbcType=VARCHAR}</if>
+            <if test="other!=null">and other=#{other,jdbcType=VARCHAR}</if>
+            <if test="putawayType!=null">and putaway_type=#{putawayType,jdbcType=VARCHAR}</if>
+            <if test="picture!=null">and picture=#{picture,jdbcType=VARCHAR}</if>
+            <if test="classify!=null">and classify=#{classify,jdbcType=VARCHAR}</if>
+            <if test="color!=null">and color=#{color,jdbcType=VARCHAR}</if>
+            <if test="shop!=null">and shop=#{shop,jdbcType=VARCHAR}</if>
+            <if test="model!=null">and model=#{model,jdbcType=VARCHAR}</if>
+            <if test="sellPrice!=null">and sell_price=#{sellPrice,jdbcType=DECIMAL}</if>
+            <if test="size!=null">and size=#{product_size,jdbcType=VARCHAR}</if>
+            <if test="barcodeOne!=null">and barcode_one=#{barcodeOne,jdbcType=INTEGER}</if>
+            <if test="barcodeTwo!=null">and barcode_two=#{barcodeTwo,jdbcType=VARCHAR}</if>
+            <if test="barcodeThree!=null">and barcode_three=#{barcodeThree,jdbcType=VARCHAR}
             </if>
-            <if test="barcodeFour!=null">and fd_barcode_four=#{barcodeFour,jdbcType=VARCHAR}</if>
-            <if test="barcodeFive!=null">and fd_barcode_five=#{barcodeFive,jdbcType=VARCHAR}</if>
-            <if test="link!=null">and fd_link=#{link,jdbcType=VARCHAR}</if>
-            <if test="remark!=null">and fd_remark=#{remark,jdbcType=VARCHAR}</if>
-            <if test="sameLink!=null">and fd_same_link=#{sameLink,jdbcType=VARCHAR}</if>
-            <if test="creater!=null">and fd_creater=#{creater,jdbcType=VARCHAR}</if>
-            <if test="updater!=null">and fd_updater=#{updater,jdbcType=VARCHAR}</if>
-            <if test="createTime!=null ">and fd_create_time=#{createTime,jdbcType=TIMESTAMP}</if>
-            <if test="updateTime!=null ">and fd_update_time=#{updateTime,jdbcType=TIMESTAMP}</if>
+            <if test="barcodeFour!=null">and barcode_four=#{barcodeFour,jdbcType=VARCHAR}</if>
+            <if test="barcodeFive!=null">and barcode_five=#{barcodeFive,jdbcType=VARCHAR}</if>
+            <if test="link!=null">and link=#{link,jdbcType=VARCHAR}</if>
+            <if test="remark!=null">and remark=#{remark,jdbcType=VARCHAR}</if>
+            <if test="sameLink!=null">and same_link=#{sameLink,jdbcType=VARCHAR}</if>
+            <if test="creater!=null">and creater=#{creater,jdbcType=VARCHAR}</if>
+            <if test="updater!=null">and updater=#{updater,jdbcType=VARCHAR}</if>
+            <if test="createTime!=null ">and create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+            <if test="updateTime!=null ">and update_time=#{updateTime,jdbcType=TIMESTAMP}</if>
         </where>
     </delete>
 
@@ -166,31 +166,31 @@
         from new_product_base
         <where>
             <if test="id!=null">id=#{id,jdbcType=INTEGER}</if>
-            <if test="userId!=null">and fp_userid_=#{userId,jdbcType=INTEGER}</if>
-            <if test="itemNo!=null">and fd_item_no=#{itemNo,jdbcType=VARCHAR}</if>
-            <if test="mainCode!=null">and fd_main_code=#{mainCode,jdbcType=VARCHAR}</if>
-            <if test="other!=null">and fd_other=#{other,jdbcType=VARCHAR}</if>
-            <if test="putawayType!=null">and fd_putaway_type=#{putawayType,jdbcType=VARCHAR}</if>
-            <if test="picture!=null">and ft_picture=#{picture,jdbcType=VARCHAR}</if>
-            <if test="classify!=null">and ft_classify=#{classify,jdbcType=VARCHAR}</if>
-            <if test="color!=null">and fd_color=#{color,jdbcType=VARCHAR}</if>
-            <if test="shop!=null">and fd_shop=#{shop,jdbcType=VARCHAR}</if>
-            <if test="model!=null">and fd_model=#{model,jdbcType=VARCHAR}</if>
-            <if test="sellPrice!=null">and fd_sell_price=#{sellPrice,jdbcType=DOUBLE}</if>
-            <if test="size!=null">and fd_size=#{size,jdbcType=VARCHAR}</if>
-            <if test="barcodeOne!=null">and fd_barcode_one=#{barcodeOne,jdbcType=INTEGER}</if>
-            <if test="barcodeTwo!=null">and fd_barcode_two=#{barcodeTwo,jdbcType=VARCHAR}</if>
-            <if test="barcodeThree!=null">and fd_barcode_three=#{barcodeThree,jdbcType=VARCHAR}
+            <if test="userId!=null">and user_id=#{userId,jdbcType=INTEGER}</if>
+            <if test="itemNo!=null">and item_no=#{itemNo,jdbcType=VARCHAR}</if>
+            <if test="mainCode!=null">and main_code=#{mainCode,jdbcType=VARCHAR}</if>
+            <if test="other!=null">and other=#{other,jdbcType=VARCHAR}</if>
+            <if test="putawayType!=null">and putaway_type=#{putawayType,jdbcType=VARCHAR}</if>
+            <if test="picture!=null">and picture=#{picture,jdbcType=VARCHAR}</if>
+            <if test="classify!=null">and classify=#{classify,jdbcType=VARCHAR}</if>
+            <if test="color!=null">and color=#{color,jdbcType=VARCHAR}</if>
+            <if test="shop!=null">and shop=#{shop,jdbcType=VARCHAR}</if>
+            <if test="model!=null">and model=#{model,jdbcType=VARCHAR}</if>
+            <if test="sellPrice!=null">and sell_price=#{sellPrice,jdbcType=DECIMAL}</if>
+            <if test="size!=null">and size=#{product_size,jdbcType=VARCHAR}</if>
+            <if test="barcodeOne!=null">and barcode_one=#{barcodeOne,jdbcType=INTEGER}</if>
+            <if test="barcodeTwo!=null">and barcode_two=#{barcodeTwo,jdbcType=VARCHAR}</if>
+            <if test="barcodeThree!=null">and barcode_three=#{barcodeThree,jdbcType=VARCHAR}
             </if>
-            <if test="barcodeFour!=null">and fd_barcode_four=#{barcodeFour,jdbcType=VARCHAR}</if>
-            <if test="barcodeFive!=null">and fd_barcode_five=#{barcodeFive,jdbcType=VARCHAR}</if>
-            <if test="link!=null">and fd_link=#{link,jdbcType=VARCHAR}</if>
-            <if test="remark!=null">and fd_remark=#{remark,jdbcType=VARCHAR}</if>
-            <if test="sameLink!=null">and fd_same_link=#{sameLink,jdbcType=VARCHAR}</if>
-            <if test="creater!=null">and fd_creater=#{creater,jdbcType=VARCHAR}</if>
-            <if test="updater!=null">and fd_updater=#{updater,jdbcType=VARCHAR}</if>
-            <if test="createTime!=null ">and fd_create_time=#{createTime,jdbcType=TIMESTAMP}</if>
-            <if test="updateTime!=null ">and fd_update_time=#{updateTime,jdbcType=TIMESTAMP}</if>
+            <if test="barcodeFour!=null">and barcode_four=#{barcodeFour,jdbcType=VARCHAR}</if>
+            <if test="barcodeFive!=null">and barcode_five=#{barcodeFive,jdbcType=VARCHAR}</if>
+            <if test="link!=null">and link=#{link,jdbcType=VARCHAR}</if>
+            <if test="remark!=null">and remark=#{remark,jdbcType=VARCHAR}</if>
+            <if test="sameLink!=null">and same_link=#{sameLink,jdbcType=VARCHAR}</if>
+            <if test="creater!=null">and creater=#{creater,jdbcType=VARCHAR}</if>
+            <if test="updater!=null">and updater=#{updater,jdbcType=VARCHAR}</if>
+            <if test="createTime!=null ">and create_time=#{createTime,jdbcType=TIMESTAMP}</if>
+            <if test="updateTime!=null ">and update_time=#{updateTime,jdbcType=TIMESTAMP}</if>
         </where>
     </select>
 
@@ -199,31 +199,30 @@
     <update id="updateById" parameterType="com.platform.entity.NewProductBase">
 		update new_product_base
 		set
-		fp_userid_=#{userId,jdbcType=INTEGER},
-        fd_item_no=#{itemNo,jdbcType=VARCHAR},
-		fd_main_code=#{mainCode,jdbcType=VARCHAR},
-		fd_other=#{other,jdbcType=VARCHAR},
-		fd_putaway_type=#{putawayType,jdbcType=VARCHAR},
-		ft_picture=#{picture,jdbcType=VARCHAR},
-		ft_classify=#{classify,jdbcType=VARCHAR},
-		fd_color=#{color,jdbcType=VARCHAR},
-		fd_shop=#{shop,jdbcType=VARCHAR},
-		fd_model=#{model,jdbcType=VARCHAR},
-		fd_sell_price=#{sellPrice,jdbcType=DOUBLE},
-		fd_size=#{size,jdbcType=VARCHAR},
-		fd_barcode_one=#{barcodeOne,jdbcType=INTEGER},
-		fd_barcode_two=#{barcodeTwo,jdbcType=VARCHAR},
-		fd_barcode_three=#{barcodeThree,jdbcType=VARCHAR},
-		fd_barcode_four=#{barcodeFour,jdbcType=VARCHAR},
-		fd_barcode_five=#{barcodeFive,jdbcType=VARCHAR},
-		fd_link=#{link,jdbcType=VARCHAR},
-		fd_remark=#{remark,jdbcType=VARCHAR},
-		fd_same_link=#{sameLink,jdbcType=VARCHAR},
-		fd_creater=#{creater,jdbcType=VARCHAR},
-		fd_updater=#{updater,jdbcType=VARCHAR},
-		fd_update_time=now()
-		where id =
-		#{id,jdbcType=INTEGER}
+		user_id=#{userId,jdbcType=INTEGER},
+        item_no=#{itemNo,jdbcType=VARCHAR},
+		main_code=#{mainCode,jdbcType=VARCHAR},
+		other=#{other,jdbcType=VARCHAR},
+		putaway_type=#{putawayType,jdbcType=VARCHAR},
+		picture=#{picture,jdbcType=VARCHAR},
+		classify=#{classify,jdbcType=VARCHAR},
+		color=#{color,jdbcType=VARCHAR},
+		shop=#{shop,jdbcType=VARCHAR},
+		model=#{model,jdbcType=VARCHAR},
+		sell_price=#{sellPrice,jdbcType=DECIMAL},
+		size=#{product_size,jdbcType=VARCHAR},
+		barcode_one=#{barcodeOne,jdbcType=INTEGER},
+		barcode_two=#{barcodeTwo,jdbcType=VARCHAR},
+		barcode_three=#{barcodeThree,jdbcType=VARCHAR},
+		barcode_four=#{barcodeFour,jdbcType=VARCHAR},
+		barcode_five=#{barcodeFive,jdbcType=VARCHAR},
+		link=#{link,jdbcType=VARCHAR},
+		remark=#{remark,jdbcType=VARCHAR},
+		same_link=#{sameLink,jdbcType=VARCHAR},
+		creater=#{creater,jdbcType=VARCHAR},
+		updater=#{updater,jdbcType=VARCHAR},
+		update_time=now()
+		where id = #{id,jdbcType=INTEGER}
 	</update>
 
 
@@ -231,30 +230,30 @@
     <insert id="save" parameterType="com.platform.entity.NewProductBase">
         insert into new_product_base
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test=" userId!= null">fp_userid_,</if>
-            <if test=" itemNo!= null">fd_item_no,</if>
-            <if test=" mainCode!= null">fd_main_code,</if>
-            <if test=" other!= null">fd_other,</if>
-            <if test=" putawayType!= null">,fd_putaway_type</if>
-            <if test=" picture!= null">ft_picture,</if>
-            <if test=" classify!= null">ft_classify,</if>
-            <if test=" color!= null">fd_color,</if>
-            <if test=" shop!= null">fd_shop,</if>
-            <if test=" model!= null">fd_model,</if>
-            <if test=" sellPrice!= null">fd_sell_price,</if>
-            <if test=" size!= null">fd_size,</if>
-            <if test=" barcodeOne!= null">fd_barcode_one,</if>
-            <if test=" barcodeTwo!= null">fd_barcode_two,</if>
-            <if test=" barcodeThree!= null">fd_barcode_three,</if>
-            <if test=" barcodeFour!= null">fd_barcode_four,</if>
-            <if test=" barcodeFive!= null">fd_barcode_five,</if>
-            <if test=" link!= null">fd_link,</if>
-            <if test=" remark!= null">fd_mark,</if>
-            <if test=" sameLink!= null">fd_same_link,</if>
-            <if test=" creater!= null">fd_creater,</if>
-            <if test=" updater!= null">fd_updater,</if>
-            fd_create_time,
-            fd_update_time
+            <if test=" userId!= null">user_id,</if>
+            <if test=" itemNo!= null">item_no,</if>
+            <if test=" mainCode!= null">main_code,</if>
+            <if test=" other!= null">other,</if>
+            <if test=" putawayType!= null">putaway_type,</if>
+            <if test=" picture!= null">picture,</if>
+            <if test=" classify!= null">classify,</if>
+            <if test=" color!= null">color,</if>
+            <if test=" shop!= null">shop,</if>
+            <if test=" model!= null">model,</if>
+            <if test=" sellPrice!= null">sell_price,</if>
+            <if test=" productSize!= null">product_size,</if>
+            <if test=" barcodeOne!= null">barcode_one,</if>
+            <if test=" barcodeTwo!= null">barcode_two,</if>
+            <if test=" barcodeThree!= null">barcode_three,</if>
+            <if test=" barcodeFour!= null">barcode_four,</if>
+            <if test=" barcodeFive!= null">barcode_five,</if>
+            <if test=" link!= null">link,</if>
+            <if test=" remark!= null">mark,</if>
+            <if test=" sameLink!= null">same_link,</if>
+            <if test=" creater!= null">creater,</if>
+            <if test=" updater!= null">updater,</if>
+            create_time,
+            update_time
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test=" userId!= null">#{userId,jdbcType=INTEGER},</if>
@@ -267,8 +266,8 @@
             <if test=" color!= null">#{color,jdbcType=VARCHAR},</if>
             <if test=" shop!= null">#{shop,jdbcType=VARCHAR},</if>
             <if test=" model!= null">#{model,jdbcType=VARCHAR},</if>
-            <if test=" sellPrice!= null">#{sellPrice,jdbcType=DOUBLE},</if>
-            <if test=" size!= null">#{size,jdbcType=VARCHAR},</if>
+            <if test=" sellPrice!= null">#{sellPrice,jdbcType=DECIMAL},</if>
+            <if test=" productSize!= null">#{product_size,jdbcType=VARCHAR},</if>
             <if test=" barcodeOne!= null">#{barcodeOne,jdbcType=VARCHAR},</if>
             <if test=" barcodeTwo!= null">#{barcodeTwo,jdbcType=VARCHAR},</if>
             <if test=" barcodeThree!= null">#{barcodeThree,jdbcType=VARCHAR},</if>
@@ -302,8 +301,8 @@
             <if test=" color!= null">#{color,jdbcType=VARCHAR},</if>
             <if test=" shop!= null">#{shop,jdbcType=VARCHAR},</if>
             <if test=" model!= null">#{model,jdbcType=VARCHAR},</if>
-            <if test=" sellPrice!= null">#{sellPrice,jdbcType=DOUBLE},</if>
-            <if test=" size!= null">#{size,jdbcType=VARCHAR},</if>
+            <if test=" sellPrice!= null">#{sellPrice,jdbcType=DECIMAL},</if>
+            <if test=" size!= null">#{product_size,jdbcType=VARCHAR},</if>
             <if test=" barcodeOne!= null">#{barcodeOne,jdbcType=VARCHAR},</if>
             <if test=" barcodeTwo!= null">#{barcodeTwo,jdbcType=VARCHAR},</if>
             <if test=" barcodeThree!= null">#{barcodeThree,jdbcType=VARCHAR},</if>
@@ -314,7 +313,7 @@
             <if test=" sameLink!= null">#{sameLink,jdbcType=VARCHAR},</if>
             <if test=" creater!= null">#{creater,jdbcType=VARCHAR},</if>
             <if test=" updater!= null">#{updater,jdbcType=VARCHAR},</if>
-            fd_update_time=now()
+            update_time=now()
         </set>
         where id= #{id,jdbcType=INTEGER}
     </update>
@@ -332,11 +331,6 @@
             <foreach collection="NewProductBaseList" separator=","
                      item="newProductBase">
                 (
-                <!-- #{NewProductBase.userId}, #{NewProductBase.itemName}, #{NewProductBase.payment},
-                    #{NewProductBase.price}, #{NewProductBase.receivable}, #{NewProductBase.size},
-                    #{NewProductBase.skuCode}, #{NewProductBase.tpTid}, #{NewProductBase.olnItemId},
-                    #{NewProductBase.olnStatus}, #{NewProductBase.olnSkuId}, #{NewProductBase.status},
-                    #{NewProductBase.orderId}, #{NewProductBase.olnItemName}, -->
                 #{newProductBase.userId},
                 #{newProductBase.itemNo},
                 #{newProductBase.mainCode},
@@ -368,7 +362,7 @@
         select
         <include refid="Base_Column_List"/>
         from new_product_base
-        where fd_item_no in
+        where item_no in
         <foreach collection="itemNoList" index="index" item="item" open="(" separator="," close=")">
             #{item}
         </foreach>
@@ -378,13 +372,13 @@
     <update id="updateBatch" parameterType="java.util.List">
         update new_product_base
         <trim prefix="set" suffixOverrides=",">
-            <trim prefix="fd_picture = case " suffix="end,">
+            <trim prefix="picture = case " suffix="end,">
                 <foreach collection="newProductBaseList" item="newProductBase" index="index">
-                        when fd_item_no=#{newProductBase.itemNo} then #{newProductBase.picture}
+                        when item_no=#{newProductBase.itemNo} then #{newProductBase.picture}
                 </foreach>
             </trim>
         </trim>
-        where fd_item_no in
+        where item_no in
         <foreach collection="newProductBaseList" index="index" item="newProductBase" separator="," open="(" close=")">
             #{newProductBase.itemNo,jdbcType=VARCHAR}
         </foreach>
